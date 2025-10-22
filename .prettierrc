@@ -1,0 +1,19 @@
+{
+  "arrowParens": "avoid",
+  "bracketSpacing": true,
+  "htmlWhitespaceSensitivity": "css",
+  "insertPragma": false,
+  "jsxBracketSameLine": false,
+  "jsxSingleQuote": true,
+  "printWidth": 80,
+  "proseWrap": "always",
+  "quoteProps": "as-needed",
+  "requirePragma": false,
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "endOfLine": "auto",
+  "trailingComma": "all",
+  "tailwindFunctions": ["classnames", "clsx", "ctl", "cn", "cva"],
+  "plugins": ["prettier-plugin-tailwindcss", "prettier-plugin-sql"]
+}

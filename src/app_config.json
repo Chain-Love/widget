@@ -1,0 +1,341 @@
+{
+  "assetsUrl": "https://assets.chain.love",
+  "proteusShieldDocs": "https://protofire-org.gitbook.io/chain-love-docs/",
+
+  "dataSources": {
+    "algorand": {
+      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/algorand.json",
+      "originNetwork": {
+        "name": "Algorand",
+        "icon": "algorand-mainnet.svg",
+        "chains": [
+          {
+            "name": "Algorand",
+            "icon": "algorand-mainnet.svg",
+            "key": "mainnet"
+          },
+          {
+            "name": "Algorand Testnet",
+            "icon": "algorand-testnet.svg",
+            "key": "testnet"
+          }
+        ]
+      }
+    },
+
+    "arbitrum": {
+      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/arbitrum.json",
+      "originNetwork": {
+        "name": "Arbitrum",
+        "icon": "arbitrum.svg",
+        "chains": [
+          {
+            "name": "Arbitrum One",
+            "icon": "arbitrum.svg",
+            "key": "one"
+          },
+          {
+            "name": "Arbitrum Nova",
+            "icon": "arbitrum-nova.svg",
+            "key": "nova"
+          },
+          {
+            "name": "Arbitrum Sepolia",
+            "icon": "arbitrum-sepolia.svg",
+            "key": "sepolia"
+          }
+        ]
+      }
+    },
+
+    "astar": {
+      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/astar.json",
+      "originNetwork": {
+        "name": "Astar",
+        "icon": "astar.svg",
+        "chains": [
+          {
+            "name": "Astar",
+            "icon": "astar.svg",
+            "key": "astar"
+          },
+          {
+            "name": "Shiden",
+            "icon": "shiden.svg",
+            "key": "shiden"
+          },
+          {
+            "name": "Shibuya",
+            "icon": "shibuya.svg",
+            "key": "shibuya"
+          }
+        ]
+      }
+    },
+
+    "base": {
+      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/base.json",
+      "originNetwork": {
+        "name": "Base",
+        "icon": "base.svg",
+        "chains": [
+          {
+            "name": "Base",
+            "icon": "base.svg",
+            "key": "mainnet"
+          },
+          {
+            "name": "Base Sepolia",
+            "icon": "base-testnet.svg",
+            "key": "testnet"
+          }
+        ]
+      }
+    },
+
+    "eth": {
+      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/ethereum.json",
+      "originNetwork": {
+        "name": "Ethereum",
+        "icon": "eth.svg",
+        "chains": [
+          { "name": "Mainnet", "icon": "eth.svg", "key": "mainnet" },
+          { "name": "Sepolia", "icon": "sepolia.svg", "key": "sepolia" }
+        ]
+      }
+    },
+
+    "filecoin": {
+      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/filecoin.json",
+      "originNetwork": {
+        "name": "Filecoin",
+        "icon": "fil.svg",
+        "chains": [
+          {
+            "name": "Filecoin",
+            "icon": "fil.svg",
+            "key": "mainnet"
+          },
+          {
+            "name": "Calibration",
+            "icon": "calibration.svg",
+            "key": "calibnet"
+          }
+        ]
+      }
+    },
+
+    "flare": {
+      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/flare.json",
+      "originNetwork": {
+        "name": "Flare",
+        "icon": "flare.svg",
+        "chains": [
+          {
+            "name": "Flare Mainnet",
+            "icon": "flare.svg",
+            "key": "mainnet"
+          },
+          {
+            "name": "Flare Testnet Coston2",
+            "icon": "coston2.svg",
+            "key": "coston2"
+          },
+          {
+            "name": "Songbird Canary-Network",
+            "icon": "songbird.svg",
+            "key": "songbird"
+          },
+          {
+            "name": "Songbird Testnet Coston",
+            "icon": "coston.svg",
+            "key": "coston"
+          }
+        ]
+      }
+    },
+
+    "lens": {
+      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/lens.json",
+      "originNetwork": {
+        "name": "Lens",
+        "icon": "lens.svg",
+        "chains": [
+          {
+            "name": "Lens",
+            "icon": "lens.svg",
+            "key": "mainnet"
+          },
+          {
+            "name": "Testnet",
+            "icon": "lens-testnet.svg",
+            "key": "testnet"
+          }
+        ]
+      }
+    },
+
+    "linea": {
+      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/linea.json",
+      "originNetwork": {
+        "name": "Linea",
+        "icon": "linea.svg",
+        "chains": [
+          {
+            "name": "Linea Mainnet",
+            "icon": "linea.svg",
+            "key": "mainnet"
+          },
+          {
+            "name": "Linea Sepolia",
+            "icon": "linea-sepolia.svg",
+            "key": "sepolia"
+          }
+        ]
+      }
+    },
+
+    "optimism": {
+      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/optimism.json",
+      "originNetwork": {
+        "name": "Optimism",
+        "icon": "optimism-mainnet.svg",
+        "chains": [
+          {
+            "name": "Optimism Mainnet",
+            "icon": "optimism-mainnet.svg",
+            "key": "mainnet"
+          },
+          {
+            "name": "Optimism Sepolia",
+            "icon": "optimism-testnet.svg",
+            "key": "testnet"
+          }
+        ]
+      }
+    },
+
+    "polygon": {
+      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/polygon.json",
+      "originNetwork": {
+        "name": "Polygon",
+        "icon": "polygon.svg",
+        "chains": [
+          {
+            "name": "Polygon",
+            "icon": "polygon.svg",
+            "key": "mainnet"
+          }
+        ]
+      }
+    },
+
+    "somnia": {
+      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/somnia.json",
+      "originNetwork": {
+        "name": "Somnia",
+        "icon": "somnia.svg",
+        "chains": [
+          { "name": "Somnia Mainnet", "icon": "somnia.svg", "key": "mainnet" },
+          {
+            "name": "Somnia Testnet",
+            "icon": "somnia-test.svg",
+            "key": "testnet"
+          }
+        ]
+      }
+    },
+
+    "stellar": {
+      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/stellar.json",
+      "originNetwork": {
+        "name": "Stellar",
+        "icon": "stellar.svg",
+        "chains": [
+          {
+            "name": "Stellar",
+            "icon": "stellar.svg",
+            "key": "mainnet"
+          },
+          {
+            "name": "Stellar Testnet",
+            "icon": "stellar-testnet.svg",
+            "key": "testnet"
+          }
+        ]
+      }
+    }
+  },
+
+  "hiddenColumns": {
+    "rpc": [
+      "address",
+      "uptimeSla",
+      "bandwidthSla",
+      "blocksBehindSla",
+      "availableApis",
+      "limitations",
+      "securityImprovements",
+      "monitoringAndAnalytics",
+      "regions",
+      "verifiedUptime",
+      "verifiedLatency",
+      "verifiedBlocksBehindAvg"
+    ],
+    "indexing": [
+      "address",
+      "availableApis",
+      "limitations",
+      "securityImprovements",
+      "monitoringAndAnalytics",
+      "regions",
+      "additionalFeatures",
+      "verifiedUptime",
+      "verifiedLatency",
+      "verifiedBlocksBehindAvg",
+      "uptimeSla",
+      "bandwidthSla",
+      "blocksBehindSla",
+      "supportSla"
+    ],
+    "explorer": ["availableApis", "sdk", "pricing"],
+    "oracle": [
+      "availableApis",
+      "monitoringAndAnalytics",
+      "additionalFeatures",
+      "dataTypes",
+      "decentralizationModel",
+      "economicalSecurity",
+      "economicalSecurityNote",
+      "sdk",
+      "auditsPerformed"
+    ],
+    "bridge": [
+      "openSource",
+      "availableApis",
+      "monitoringAndAnalytics",
+      "additionalFeatures",
+      "txSpeedSla",
+      "throughputSla",
+      "economicalSecurity",
+      "economicalSecurityNote",
+      "auditsPerformed",
+      "decentralizationModel",
+      "sdk"
+    ],
+    "devTool": [],
+    "faucet": ["hasCaptcha", "requiresMainnetBalance"],
+    "analytic": [],
+    "wallet": [
+      "openSource",
+      "custodial",
+      "keyExport",
+      "evm",
+      "tendermint",
+      "staking",
+      "price",
+      "support",
+      "audit"
+    ]
+  }
+}

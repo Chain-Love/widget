@@ -1,0 +1,128 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Base palette */
+  --info: 220 70% 50%;
+  --warning: 30 80% 55%;
+  --success: 142 100% 45%;
+  --destructive: 8 98% 49%;
+
+  --white-contrast: 0 0% 98%;
+  --black-contrast: 240 33% 1%;
+
+  --gray-1: 0 0% 7%;
+  --gray-2: 0 0% 10%;
+  --gray-3: 0 0% 13%;
+  --gray-4: 0 0% 16%;
+  --gray-5: 0 0% 19%;
+  --gray-6: 0 0% 23%;
+  --gray-7: 0 0% 28%;
+  --gray-8: 0 0% 38%;
+  --gray-9: 0 0% 43%;
+  --gray-10: 0 0% 48%;
+  --gray-11: 0 0% 71%;
+  --gray-12: 0 0% 93%;
+
+  --sand-1: 60 3% 6%;
+  --sand-2: 60 2% 10%;
+  --sand-3: 60 1% 13%;
+  --sand-4: 60 2% 16%;
+  --sand-5: 60 3% 19%;
+  --sand-6: 45 4% 22%;
+  --sand-7: 48 4% 28%;
+  --sand-8: 43 4% 37%;
+  --sand-9: 47 4% 42%;
+  --sand-10: 53 3% 47%;
+  --sand-11: 45 5% 69%;
+  --sand-12: 60 6% 93%;
+
+  --accent-1: 27 24% 7%;
+  --accent-2: 28 33% 9%;
+  --accent-3: 28 65% 12%;
+  --accent-4: 28 100% 14%;
+  --accent-5: 28 100% 17%;
+  --accent-6: 27 79% 22%;
+  --accent-7: 25 63% 30%;
+  --accent-8: 23 60% 40%;
+  --accent-9: 23 93% 53%;
+  --accent-10: 26 100% 56%;
+  --accent-11: 26 100% 67%;
+  --accent-12: 30 100% 88%;
+}
+
+/* light theme  */
+.light {
+  --white-contrast: 240 33% 1%;
+  --black-contrast: 0 0% 98%;
+
+  --gray-1: 0 0% 99%;
+  --gray-2: 0 0% 98%;
+  --gray-3: 0 0% 94%;
+  --gray-4: 0 0% 91%;
+  --gray-5: 0 0% 88%;
+  --gray-6: 0 0% 85%;
+  --gray-7: 0 0% 81%;
+  --gray-8: 0 0% 73%;
+  --gray-9: 0 0% 55%;
+  --gray-10: 0 0% 51%;
+  --gray-11: 0 0% 39%;
+  --gray-12: 0 0% 13%;
+
+  --sand-1: 60 20% 99%;
+  --sand-2: 60 8% 97%;
+  --sand-3: 30 7% 94%;
+  --sand-4: 40 6% 91%;
+  --sand-5: 45 6% 88%;
+  --sand-6: 45 5% 85%;
+  --sand-7: 48 5% 80%;
+  --sand-8: 51 5% 72%;
+  --sand-9: 60 3% 54%;
+  --sand-10: 60 2% 50%;
+  --sand-11: 60 3% 38%;
+  --sand-12: 48 8% 12%;
+
+  --accent-1: 20 60% 99%;
+  --accent-2: 33 100% 96%;
+  --accent-3: 37 100% 92%;
+  --accent-4: 34 100% 85%;
+  --accent-5: 33 100% 80%;
+  --accent-6: 30 100% 75%;
+  --accent-7: 27 87% 71%;
+  --accent-8: 25 80% 63%;
+  --accent-9: 23 93% 53%;
+  --accent-10: 24 100% 47%;
+  --accent-11: 23 100% 40%;
+  --accent-12: 16 50% 23%;
+}
+
+@layer base {
+  * {
+    @apply border-gray-6 outline-gray-10/50;
+  }
+  body {
+    @apply text-contrast-white bg-gray-1 font;
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .dash-accent {
+    --dash-img: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='1'%3e%3cline x1='0' y1='0.5' x2='100%25' y2='0.5' stroke='%23B88C67FF' stroke-width='1' stroke-dasharray='13'/%3e%3c/svg%3e");
+    background-image: var(--dash-top, none), var(--dash-bottom, none);
+    background-repeat: repeat-x, repeat-x;
+    background-position:
+      top -0.7px left,
+      bottom -0.7px left;
+    background-size:
+      auto 1px,
+      auto 1px;
+  }
+  .dash-top-accent {
+    --dash-top: var(--dash-img);
+  }
+  .dash-bottom-accent {
+    --dash-bottom: var(--dash-img);
+  }
+}
