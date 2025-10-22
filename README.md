@@ -48,7 +48,6 @@ If your organization requires full control:
 - Deploy **once** to your preferred host (e.g., Vercel/Netlify) (see
   [Deploy (quick guide)](#deploy-quick-guide)).
 - You’ll get your own domain, e.g. `https://your-widget.vercel.app`.
-- **No env vars** needed.
 - In GitBook, use our official **Chain.Love Widget Integration**  
   → [https://app.gitbook.com/integrations/chainlove-widget](https://app.gitbook.com/integrations/chainlove-widget)  
   and
@@ -58,8 +57,9 @@ If your organization requires full control:
 ### 2) Fork the Data Repo
 
 - Fork **https://github.com/Chain-Love/chain-love**.
-- The JSON feeds live under `json/`, e.g. `json/filecoin.json`,
-  `json/ethereum.json`, `json/arbitrum.json`.
+- The JSON feeds live under in **`json` branch** in the **`json` folder**, where
+  each JSON file is dedicated to the specific network, e.g.  
+  `json/filecoin.json`, `json/ethereum.json`, `json/arbitrum.json`.
 - Each file is accessible via GitHub Raw in **your** fork, e.g.  
   `https://raw.githubusercontent.com/<your-org>/chain-love/json/json/filecoin.json`.
 
