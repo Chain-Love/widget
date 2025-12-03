@@ -10,6 +10,7 @@ import { Providers } from '@/providers';
 import { Suspense } from 'react';
 import PageLoading from '@/components/ui/page-loading';
 import { Toaster } from '@/components/ui/shadcn/sonner';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -22,9 +23,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const headersList = headers();
-
   const host = headersList.get('host');
-
   const origin = `http://${host}`;
 
   const queryClient = getQueryClient();
@@ -45,6 +44,102 @@ export default async function RootLayout({
               <Toaster />
             </div>
           </HydrationBoundary>
+
+          {/* Variant 2: ResizeObserver-based continuous resize */}
+          <Script
+            id='webframe-resize-variant-2'
+            strategy='afterInteractive'
+            dangerouslySetInnerHTML={{
+              __html: `
+(function () {
+  function computeAspectRatio() {
+    var docEl = document.documentElement;
+    var body = document.body || docEl;
+    if (!docEl || !body) {
+      return 1;
+    }
+
+    var height = Math.max(
+      body.scrollHeight,
+      docEl.scrollHeight,
+      body.offsetHeight,
+      docEl.offsetHeight,
+      body.clientHeight,
+      docEl.clientHeight
+    );
+
+    var width =
+      docEl.clientWidth ||
+      window.innerWidth ||
+      body.clientWidth ||
+      1;
+
+    if (!height || height <= 0) return 1;
+    var aspectRatio = width / height;
+    console.log('[Widget][Variant2] computeAspectRatio()', { width, height, aspectRatio });
+    return aspectRatio;
+  }
+
+  function sendReady() {
+    try {
+      console.log('[Widget][Variant2] sending @webframe.ready');
+      window.parent.postMessage({ action: '@webframe.ready' }, '*');
+    } catch (e) {
+      console.error('[Widget][Variant2] error sending @webframe.ready', e);
+    }
+  }
+
+  function sendResize() {
+    var aspectRatio = computeAspectRatio();
+    var payload = {
+      action: '@webframe.resize',
+      aspectRatio: aspectRatio,
+      maxHeight: 980,
+      maxWidth: 980,
+    };
+
+    try {
+      console.log('[Widget][Variant2] sending @webframe.resize', payload);
+      window.parent.postMessage(payload, '*');
+    } catch (e) {
+      console.error('[Widget][Variant2] error sending @webframe.resize', e);
+    }
+  }
+
+  function init() {
+    sendReady();
+    setTimeout(sendResize, 200);
+
+    var body = document.body || document.documentElement;
+
+    if ('ResizeObserver' in window && body) {
+      console.log('[Widget][Variant2] using ResizeObserver for body');
+      var ro = new ResizeObserver(function () {
+        sendResize();
+      });
+      ro.observe(body);
+
+      window.addEventListener('beforeunload', function () {
+        try {
+          ro.disconnect();
+        } catch (e) {}
+      });
+    } else {
+      console.log('[Widget][Variant2] ResizeObserver not available, fallback to window.resize');
+      window.addEventListener('resize', function () {
+        sendResize();
+      });
+    }
+  }
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    init();
+  } else {
+    window.addEventListener('DOMContentLoaded', init, { once: true });
+  }
+})();`,
+            }}
+          />
         </Providers>
       </body>
     </html>
