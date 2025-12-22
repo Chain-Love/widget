@@ -10,6 +10,7 @@ import { Providers } from '@/providers';
 import { Suspense } from 'react';
 import PageLoading from '@/components/ui/page-loading';
 import { Toaster } from '@/components/ui/shadcn/sonner';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -22,9 +23,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const headersList = headers();
-
   const host = headersList.get('host');
-
   const origin = `http://${host}`;
 
   const queryClient = getQueryClient();
@@ -39,12 +38,138 @@ export default async function RootLayout({
       <body>
         <Providers>
           <HydrationBoundary state={dehydrate(queryClient)}>
-            <div className='flex min-h-dvh flex-col'>
+            <div id='cl-widget-root' className='flex min-h-dvh flex-col'>
               <Suspense fallback={<PageLoading />}>{children}</Suspense>
-
               <Toaster />
             </div>
           </HydrationBoundary>
+
+          {/* Marketo-like: @webframe.ready + @webframe.resize { size: { height } } */}
+          <Script
+            id='cl-webframe-resize-marketo-style'
+            strategy='afterInteractive'
+            dangerouslySetInnerHTML={{
+              __html: `
+(function () {
+  const gitbookWebFrame = window.parent;
+  const ROOT_ID = 'cl-widget-root';
+  let cachedSize;
+
+  /**
+   * Send an action payload back to the GitBook ContentKit component.
+   * payload: { action: '@webframe.ready' } | { action: '@webframe.resize', size: { height: number } }
+   */
+  function sendAction(payload) {
+    if (!gitbookWebFrame) {
+      console.warn('[chainlove-widget] parent window is not available');
+      return;
+    }
+
+    try {
+      console.info('[chainlove-widget] sendAction', payload);
+      gitbookWebFrame.postMessage({ action: payload }, '*');
+    } catch (error) {
+      console.error('[chainlove-widget] error in postMessage', error);
+    }
+  }
+
+  /**
+   * Recalculate the height of the root element and send @webframe.resize
+   * if the height changed.
+   */
+  function recalculateSize() {
+    const el = document.getElementById(ROOT_ID);
+
+    if (!el) {
+      console.warn("[chainlove-widget] missing element with id '" + ROOT_ID + "'");
+      return;
+    }
+
+    const rawHeight = el.offsetHeight;
+    if (!rawHeight || rawHeight <= 0) {
+      console.warn('[chainlove-widget] invalid offsetHeight', rawHeight);
+      return;
+    }
+
+    // Add a small buffer to account for iframe chrome.
+    const size = {
+      height: typeof rawHeight === 'number' ? rawHeight + 2 : rawHeight,
+    };
+
+    if (cachedSize && cachedSize.height === size.height) {
+      // Do not send a resize event if the height did not change.
+      return;
+    }
+
+    cachedSize = size;
+    console.info('[chainlove-widget] recalculateSize', size);
+
+    sendAction({
+      action: '@webframe.resize',
+      size,
+    });
+  }
+
+  /**
+   * Initialize webframe lifecycle: send @webframe.ready once and
+   * keep the parent updated with @webframe.resize on DOM changes.
+   */
+  function init() {
+    console.info('[chainlove-widget] init');
+
+    // Notify GitBook that the iframe content is ready.
+    sendAction({ action: '@webframe.ready' });
+
+    // Give React a short delay to finish rendering nested content,
+    // then measure the initial height.
+    setTimeout(recalculateSize, 200);
+
+    const target =
+      document.getElementById(ROOT_ID) ||
+      document.body ||
+      document.documentElement;
+
+    if (!target) {
+      console.warn('[chainlove-widget] no target element for MutationObserver');
+      return;
+    }
+
+    if ('MutationObserver' in window) {
+      console.info('[chainlove-widget] attaching MutationObserver on #' + ROOT_ID);
+
+      const observer = new MutationObserver(() => {
+        recalculateSize();
+      });
+
+      observer.observe(target, {
+        attributes: true,
+        childList: true,
+        subtree: true,
+      });
+
+      window.addEventListener('beforeunload', () => {
+        try {
+          observer.disconnect();
+        } catch (error) {
+          // ignore
+        }
+      });
+    } else {
+      console.info('[chainlove-widget] MutationObserver not available, fallback to window.resize');
+      window.addEventListener('resize', () => {
+        recalculateSize();
+      });
+    }
+  }
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    init();
+  } else {
+    window.addEventListener('DOMContentLoaded', init, { once: true });
+  }
+})();`,
+            }}
+          />
         </Providers>
       </body>
     </html>
