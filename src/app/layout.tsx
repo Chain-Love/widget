@@ -55,10 +55,6 @@ export default async function RootLayout({
   const ROOT_ID = 'cl-widget-root';
   let cachedSize;
 
-  /**
-   * Send an action payload back to the GitBook ContentKit component.
-   * payload: { action: '@webframe.ready' } | { action: '@webframe.resize', size: { height: number } }
-   */
   function sendAction(payload) {
     if (!gitbookWebFrame) {
       console.warn('[chainlove-widget] parent window is not available');
@@ -74,46 +70,53 @@ export default async function RootLayout({
   }
 
   /**
-   * Recalculate the height of the root element and send @webframe.resize
-   * if the height changed.
+   * Recalculate the size of the root element and send @webframe.resize
+   * if the size changed.
    */
   function recalculateSize() {
-    const el = document.getElementById(ROOT_ID);
+  const el = document.getElementById(ROOT_ID);
 
-    if (!el) {
-      console.warn("[chainlove-widget] missing element with id '" + ROOT_ID + "'");
-      return;
-    }
-
-    const rawHeight = el.offsetHeight;
-    if (!rawHeight || rawHeight <= 0) {
-      console.warn('[chainlove-widget] invalid offsetHeight', rawHeight);
-      return;
-    }
-
-    // Add a small buffer to account for iframe chrome.
-    const size = {
-      height: typeof rawHeight === 'number' ? rawHeight + 2 : rawHeight,
-    };
-
-    if (cachedSize && cachedSize.height === size.height) {
-      // Do not send a resize event if the height did not change.
-      return;
-    }
-
-    cachedSize = size;
-    console.info('[chainlove-widget] recalculateSize', size);
-
-    sendAction({
-      action: '@webframe.resize',
-      size,
-    });
+  if (!el) {
+    console.warn("[chainlove-widget] missing element with id '" + ROOT_ID + "'");
+    return;
   }
 
-  /**
-   * Initialize webframe lifecycle: send @webframe.ready once and
-   * keep the parent updated with @webframe.resize on DOM changes.
-   */
+  const rawHeight = el.offsetHeight;
+  const rawWidth = el.offsetWidth;
+
+  if (!rawHeight || rawHeight <= 0) {
+    console.warn('[chainlove-widget] invalid offsetHeight', rawHeight);
+    return;
+  }
+
+  // Add a small buffer to account for iframe chrome.
+  const height =
+    typeof rawHeight === 'number' ? rawHeight + 2 : rawHeight;
+
+  // If rawWidth is 0 for some reason, we simply skip aspectRatio.
+  const aspectRatio =
+    rawWidth && rawWidth > 0 ? rawWidth / height : undefined;
+
+  const size = { height, aspectRatio };
+
+  if (
+    cachedSize &&
+    cachedSize.height === size.height &&
+    cachedSize.aspectRatio === size.aspectRatio
+  ) {
+    // Do not send a resize event if nothing changed.
+    return;
+  }
+
+  cachedSize = size;
+  console.info('[chainlove-widget] recalculateSize', size);
+
+  sendAction({
+    action: '@webframe.resize',
+    size,
+  });
+}
+
   function init() {
     console.info('[chainlove-widget] init');
 
@@ -121,7 +124,7 @@ export default async function RootLayout({
     sendAction({ action: '@webframe.ready' });
 
     // Give React a short delay to finish rendering nested content,
-    // then measure the initial height.
+    // then measure the initial size.
     setTimeout(recalculateSize, 200);
 
     const target =
