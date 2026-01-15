@@ -3,6 +3,7 @@
 import { Table } from '@tanstack/react-table';
 import { ChevronDown, Filter, Network, X, Settings2 } from 'lucide-react';
 import MultiSelectFilter from './multi-select-content';
+import SearchableMultiSelectFilter from './searchable-multi-select-content';
 import RangeContent from './range-content';
 import NetworksRadioSelect from './networks-content';
 import AccordionFilter from './accordion-filter';
@@ -107,6 +108,9 @@ export default function AllFiltersDropdown<TData>({
             const activeCount = Array.isArray(currentValue)
               ? currentValue.length
               : 0;
+
+            const useSearchable = meta.key === 'tag' || meta.key === 'toolType';
+
             return (
               <AccordionFilter
                 key={meta.key}
@@ -115,7 +119,11 @@ export default function AllFiltersDropdown<TData>({
                 icon={meta.icon}
                 activeCount={activeCount}
               >
-                <MultiSelectFilter meta={meta} table={table} />
+                {useSearchable ? (
+                  <SearchableMultiSelectFilter meta={meta} table={table} />
+                ) : (
+                  <MultiSelectFilter meta={meta} table={table} />
+                )}
               </AccordionFilter>
             );
           }
