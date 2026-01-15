@@ -9,14 +9,21 @@ export const COLUMNS_META: Record<string, ColumnMeta> = {
     displayName: 'Price',
     description: 'Cost of using the service.',
   },
-  plan: {
-    displayName: 'Plan',
-    description: 'Available subscription plans and pricing tiers.',
+  planType: {
+    displayName: 'Plan Type',
+    description: 'Available subscription plan types and pricing tiers.',
   },
-  nodeType: {
-    displayName: 'Node Type',
-    description:
-      'Type of blockchain node (Archive, Full Archive, Recent State).',
+  planName: {
+    displayName: 'Plan Name',
+    description: 'Specific name of the subscription plan.',
+  },
+  apiType: {
+    displayName: 'API Type',
+    description: 'Type of API service (RPC, Indexed Data, etc.).',
+  },
+  historicalData: {
+    displayName: 'Historical Data',
+    description: 'Support for historical blockchain data access.',
   },
   technology: {
     displayName: 'Technology',

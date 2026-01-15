@@ -5,8 +5,7 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "rpc": { "type": "array", "items": { "$ref": "#/$defs/rpc" } },
-    "indexing": { "type": "array", "items": { "$ref": "#/$defs/indexing" } },
+    "api": { "type": "array", "items": { "$ref": "#/$defs/api" } },
     "explorer": { "type": "array", "items": { "$ref": "#/$defs/explorer" } },
     "oracle": { "type": "array", "items": { "$ref": "#/$defs/oracle" } },
     "bridge": { "type": "array", "items": { "$ref": "#/$defs/bridge" } },
@@ -16,92 +15,27 @@
     "wallet": { "type": "array", "items": { "$ref": "#/$defs/wallet" } }
   },
   "$defs": {
-    "rpc": {
+    "api": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "slug": { "type": "string" },
         "provider": { "type": "string" },
-        "plan": { "type": "string" },
-        "nodeType": { "type": "string" },
-        "chain": { "type": "string" },
-        "address": { "type": ["string", "null"] },
-        "accessPrice": { "type": ["string", "null"] },
-        "queryPrice": { "type": ["string", "null"] },
-        "uptimeSla": { "type": ["string", "null"] },
-        "bandwidthSla": { "type": ["string", "null"] },
-        "blocksBehindSla": { "type": ["string", "null"] },
-        "starred": { "type": "boolean" },
-        "trial": { "type": "boolean" },
-        "availableApis": {
-          "type": ["array", "null"],
-          "items": { "type": "string" }
-        },
-        "limitations": {
-          "type": ["array", "null"],
-          "items": { "type": "string" }
-        },
-        "securityImprovements": {
-          "type": ["array", "null"],
-          "items": { "type": "string" }
-        },
-        "monitoringAndAnalytics": {
-          "type": ["array", "null"],
-          "items": { "type": "string" }
-        },
-        "regions": { "type": ["array", "null"], "items": { "type": "string" } },
-        "verifiedUptime": { "type": ["string", "null"] },
-        "verifiedLatency": { "type": ["string", "null"] },
-        "verifiedBlocksBehindAvg": { "type": ["string", "null"] },
-        "actionButtons": {
-          "type": ["array", "null"],
-          "items": { "type": "string" }
-        }
-      },
-      "required": [
-        "slug",
-        "provider",
-        "plan",
-        "nodeType",
-        "chain",
-        "address",
-        "accessPrice",
-        "queryPrice",
-        "uptimeSla",
-        "bandwidthSla",
-        "blocksBehindSla",
-        "starred",
-        "trial",
-        "availableApis",
-        "limitations",
-        "securityImprovements",
-        "monitoringAndAnalytics",
-        "regions",
-        "verifiedUptime",
-        "verifiedLatency",
-        "verifiedBlocksBehindAvg",
-        "actionButtons"
-      ]
-    },
-
-    "indexing": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "slug": { "type": "string" },
-        "provider": { "type": "string" },
-        "chain": { "type": "string" },
-        "address": { "type": ["string", "null"] },
+        "apiType": { "type": "string" },
         "technology": { "type": "string" },
-        "plan": { "type": "string" },
-        "trial": { "type": "boolean" },
+        "planType": { "type": "string" },
+        "planName": { "type": ["string", "null"] },
+        "chain": { "type": "string" },
+        "address": { "type": ["string", "null"] },
         "accessPrice": { "type": ["string", "null"] },
         "queryPrice": { "type": ["string", "null"] },
         "uptimeSla": { "type": ["string", "null"] },
         "bandwidthSla": { "type": ["string", "null"] },
         "blocksBehindSla": { "type": ["string", "null"] },
         "supportSla": { "type": ["string", "null"] },
+        "historicalData": { "type": ["string", "null"] },
         "starred": { "type": "boolean" },
+        "trial": { "type": "boolean" },
         "availableApis": {
           "type": ["array", "null"],
           "items": { "type": "string" }
@@ -134,18 +68,21 @@
       "required": [
         "slug",
         "provider",
+        "apiType",
+        "technology",
+        "planType",
+        "planName",
         "chain",
         "address",
-        "technology",
-        "plan",
-        "trial",
         "accessPrice",
         "queryPrice",
         "uptimeSla",
         "bandwidthSla",
         "blocksBehindSla",
         "supportSla",
+        "historicalData",
         "starred",
+        "trial",
         "availableApis",
         "limitations",
         "securityImprovements",

@@ -107,7 +107,9 @@ export default function MobileCards<C extends CategoryKey = CategoryKey>({
               </button>
             </div>
             {headerGroup.headers.map(header => {
-              if (!['plan', 'nodeType', 'chain'].includes(header.column.id))
+              if (
+                !['chain', 'planType', 'technology'].includes(header.column.id)
+              )
                 return null;
 
               return (
@@ -272,7 +274,11 @@ export default function MobileCards<C extends CategoryKey = CategoryKey>({
                   </span>
                 </div>
                 {row.getVisibleCells().map(cell => {
-                  if (!['plan', 'nodeType', 'chain'].includes(cell.column.id))
+                  if (
+                    !['chain', 'planType', 'technology'].includes(
+                      cell.column.id,
+                    )
+                  )
                     return null;
                   return (
                     <div
@@ -443,7 +449,7 @@ function MobileCard<C extends CategoryKey>({
         {row
           .getVisibleCells()
           .filter(cell =>
-            ['plan', 'nodeType', 'chain'].includes(cell.column.id),
+            ['chain', 'planType', 'technology'].includes(cell.column.id),
           )
           .map(cell => (
             <div

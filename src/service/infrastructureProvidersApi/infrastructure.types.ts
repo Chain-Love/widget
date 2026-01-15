@@ -6,8 +6,7 @@
  */
 
 export interface ToolboxNetworkData {
-  rpc?: Rpc[];
-  indexing?: Indexing[];
+  api?: Api[];
   explorer?: Explorer[];
   oracle?: Oracle[];
   bridge?: Bridge[];
@@ -16,45 +15,24 @@ export interface ToolboxNetworkData {
   analytic?: Analytic[];
   wallet?: Wallet[];
 }
-export interface Rpc {
+export interface Api {
   slug: string;
   provider: string;
-  plan: string;
-  nodeType: string;
-  chain: string;
-  address: string | null;
-  accessPrice: string | null;
-  queryPrice: string | null;
-  uptimeSla: string | null;
-  bandwidthSla: string | null;
-  blocksBehindSla: string | null;
-  starred: boolean;
-  trial: boolean;
-  availableApis: string[] | null;
-  limitations: string[] | null;
-  securityImprovements: string[] | null;
-  monitoringAndAnalytics: string[] | null;
-  regions: string[] | null;
-  verifiedUptime: string | null;
-  verifiedLatency: string | null;
-  verifiedBlocksBehindAvg: string | null;
-  actionButtons: string[] | null;
-}
-export interface Indexing {
-  slug: string;
-  provider: string;
-  chain: string;
-  address: string | null;
+  apiType: string;
   technology: string;
-  plan: string;
-  trial: boolean;
+  planType: string;
+  planName: string | null;
+  chain: string;
+  address: string | null;
   accessPrice: string | null;
   queryPrice: string | null;
   uptimeSla: string | null;
   bandwidthSla: string | null;
   blocksBehindSla: string | null;
   supportSla: string | null;
+  historicalData: string | null;
   starred: boolean;
+  trial: boolean;
   availableApis: string[] | null;
   limitations: string[] | null;
   securityImprovements: string[] | null;

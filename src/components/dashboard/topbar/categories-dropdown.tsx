@@ -37,7 +37,7 @@ export default function CategoriesDropdown({
       {availableCategories.map(c => {
         const isSelected = c.key === selectedCategoryId;
         const fullLabel = CATEGORIES[c.key]?.label ?? c.key;
-        const shortLabel = c.key === 'rpc' ? 'RPC' : fullLabel;
+        const shortLabel = c.key === 'api' ? 'API' : fullLabel;
 
         return (
           <Button

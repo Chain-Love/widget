@@ -99,13 +99,13 @@ GitBook integration block.
 | ---------: | :----- | :------- | :------------------ | :----------------------------------------------------------------------------------------------------------------------------- |
 |  `network` | string | **Yes**  | `?network=filecoin` | Selects which network to show (key from your config, e.g. `filecoin`, `eth`, `arbitrum`).                                      |
 |    `chain` | string | No       | `&chain=mainnet`    | Preselect a specific chain **key** within the chosen network (e.g. `mainnet`, `sepolia`, `nova`).                              |
-| `category` | string | No       | `&category=rpc`     | Focus on a toolbox category like `rpc`, `indexing`, `explorer`, `oracle`, `bridge`, `devTool`, `faucet`, `analytic`, `wallet`. |
+| `category` | string | No       | `&category=api`     | Focus on a toolbox category like `api`, `explorer`, `oracle`, `bridge`, `devTool`, `faucet`, `analytic`, `wallet`. |
 |    `theme` | string | No       | `&theme=dark`       | UI theme (`light` or `dark` or `system`). Defaults to `system` unless you customize it.                                        |
 
 **Examples**
 
 ```text
-https://widget.docs.chain.love/?network=filecoin&category=rpc&theme=dark
+https://widget.docs.chain.love/?network=filecoin&category=api&theme=dark
 https://your-widget.vercel.app/?network=arbitrum&chain=nova
 ```
 
@@ -182,7 +182,7 @@ Here’s an example structure:
     - **`icon`** — icon filename.
     - **`key`** — the value you pass in `?chain=<key>`.
 - **`hiddenColumns`** — defines which table columns are **hidden by default**
-  for each category (`rpc`, `indexing`, `explorer`, `oracle`, etc.).  
+  for each category (`api`, `explorer`, `oracle`, etc.).  
   This controls what data users see initially inside the widget.  
   We **recommend keeping the default configuration** as it’s optimized for
   clarity and layout balance,  

@@ -13,7 +13,7 @@ export type OptionsMetaByFilterKey = Record<string, OptionsByValue>;
 // Case-insensitive metadata for multiSelect options. Only override where
 // design requires icon/description/label; unknown options fall back to text.
 export const MULTISELECT_OPTIONS_META: OptionsMetaByFilterKey = {
-  plan: {
+  planType: {
     dedicated: {
       label: 'Dedicated',
       description:
@@ -40,8 +40,8 @@ export const MULTISELECT_OPTIONS_META: OptionsMetaByFilterKey = {
         },
       },
     },
-    growth: {
-      label: 'Growth',
+    'pay-as-you-go': {
+      label: 'Pay-as-you-go',
       description: 'Flexible plan for scaling projects with balanced pricing.',
       icon: {
         primary: {
@@ -73,22 +73,9 @@ export const MULTISELECT_OPTIONS_META: OptionsMetaByFilterKey = {
       description: 'Service plan with standard features and pricing.',
     },
   },
-  nodeType: {
-    'fevm archive': {
-      label: 'FEVM Archive',
-      description:
-        'Stores full history plus FVM (Filecoin Virtual Machine) data.',
-      icon: {
-        primary: {
-          filename: `computertower.svg`,
-        },
-        fallback: {
-          lucide: Database,
-        },
-      },
-    },
-    'full archive': {
-      label: 'Full Archive',
+  historicalData: {
+    archive: {
+      label: 'Archive',
       description: 'Keeps complete blockchain history for deep data queries.',
       icon: {
         primary: {
@@ -99,8 +86,8 @@ export const MULTISELECT_OPTIONS_META: OptionsMetaByFilterKey = {
         },
       },
     },
-    'recent-state': {
-      label: 'Recent State',
+    pruned: {
+      label: 'Pruned',
       description:
         'Holds only the latest state for faster, lightweight access.',
       icon: {
