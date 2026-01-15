@@ -15,8 +15,13 @@ export async function fetchRemoteProvidersPayload(
   const network = networkParam.trim().toLowerCase();
   const cfg = await getAppConfigOnServer();
 
-  const url = cfg.dataSources?.[network]?.url;
-  if (!url) throw new Error('Invalid or missing network parameter');
+  const baseUrl = cfg.dataSources?.[network]?.url;
+
+  if (!baseUrl) throw new Error('Invalid or missing network parameter');
+
+  const ts = Math.floor(Date.now() / 1000);
+
+  const url = `${baseUrl}?ts=${ts}`;
 
   const raw = await fetchClient.get<unknown>(url);
 
