@@ -268,22 +268,12 @@
   },
 
   "hiddenColumns": {
-    "rpc": [
+    "api": [
+      "supportSla",
       "address",
       "uptimeSla",
       "bandwidthSla",
       "blocksBehindSla",
-      "availableApis",
-      "limitations",
-      "securityImprovements",
-      "monitoringAndAnalytics",
-      "regions",
-      "verifiedUptime",
-      "verifiedLatency",
-      "verifiedBlocksBehindAvg"
-    ],
-    "indexing": [
-      "address",
       "availableApis",
       "limitations",
       "securityImprovements",
@@ -292,11 +282,7 @@
       "additionalFeatures",
       "verifiedUptime",
       "verifiedLatency",
-      "verifiedBlocksBehindAvg",
-      "uptimeSla",
-      "bandwidthSla",
-      "blocksBehindSla",
-      "supportSla"
+      "verifiedBlocksBehindAvg"
     ],
     "explorer": ["availableApis", "sdk", "pricing"],
     "oracle": [

@@ -1,6 +1,6 @@
 import { CellContext, SortingFn, VisibilityState } from '@tanstack/react-table';
 import { ReactElement } from 'react';
-import VerifiedLatency from './fields/rpc/verified-latency';
+import VerifiedLatency from './fields/shared/verified-latency';
 import VerifiedBlocksBehindAverage from './fields/shared/verified-blocks-behind-average';
 import ArrayCellPopover from './fields/shared/array-cell-popover';
 import ActionButton from '@/components/ui/buttons/action-button';
@@ -94,8 +94,7 @@ export function colFor<C extends CategoryKey>() {
   });
 }
 
-const colRpc = colFor<'rpc'>();
-const colIdx = colFor<'indexing'>();
+const colApi = colFor<'api'>();
 const colExp = colFor<'explorer'>();
 const colOra = colFor<'oracle'>();
 const colBr = colFor<'bridge'>();
@@ -105,25 +104,24 @@ const colAnl = colFor<'analytic'>();
 const colWlt = colFor<'wallet'>();
 
 export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
-  rpc: {
-    id: 'rpc',
-    label: 'Remote Procedure Call (RPC)',
+  api: {
+    id: 'api',
+    label: 'API',
     icon: {
       primary: { filename: `rpc.svg` },
       fallback: { lucide: l.Network },
     },
-
     description:
-      'Servers that connect to blockchain and send transactions fast.',
+      'API services for blockchain data access, RPC calls, and indexing.',
     initialState: {
       columnVisibility: {},
     },
     getColumns: () => {
       const cols: Column<
-        keyof CategoryEntityMap['rpc'] & string,
-        CategoryEntityMap['rpc']
+        keyof CategoryEntityMap['api'] & string,
+        CategoryEntityMap['api']
       >[] = [
-        colRpc(
+        colApi(
           'provider',
           {
             label: 'Provider',
@@ -139,11 +137,11 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             size: 400,
           },
         ),
-        colRpc(
+        colApi(
           'actionButtons',
           { label: 'Action', sort: 'off' },
           {
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <ActionButton
                 ctx={c}
                 actionButtons={c.row.original.actionButtons}
@@ -154,7 +152,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             size: 80,
           },
         ),
-        colRpc(
+        colApi(
           'address',
           {
             label: 'Address',
@@ -175,44 +173,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             ),
           },
         ),
-
-        colRpc(
-          'plan',
-          {
-            label: 'Plan',
-            icon: {
-              primary: { filename: `plan.svg` },
-              fallback: { lucide: l.NotepadText },
-            },
-          },
-          {
-            filter: 'multiSelect',
-            tooltip: 'Select one or more available plans for the provider.',
-          },
-          {
-            size: 100,
-          },
-        ),
-        colRpc(
-          'nodeType',
-          {
-            label: 'Node Type',
-            icon: {
-              primary: { filename: `settings.svg` },
-              fallback: { lucide: l.Settings2 },
-            },
-          },
-          {
-            filter: 'multiSelect',
-            tooltip:
-              'Select one or more available node types for the provider.',
-          },
-          {
-            size: 115,
-          },
-        ),
-
-        colRpc(
+        colApi(
           'chain',
           {
             label: 'Chain',
@@ -221,8 +182,70 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           {},
           { size: 85 },
         ),
-
-        colRpc(
+        colApi(
+          'planType',
+          {
+            label: 'Plan Type',
+            icon: {
+              primary: { filename: `plan.svg` },
+              fallback: { lucide: l.NotepadText },
+            },
+          },
+          {
+            filter: 'multiSelect',
+            tooltip:
+              'Select one or more available plan types for the provider.',
+          },
+          {
+            size: 100,
+          },
+        ),
+        colApi(
+          'planName',
+          {
+            label: 'Plan Name',
+            icon: {
+              primary: { filename: `plan.svg` },
+              fallback: { lucide: l.NotepadText },
+            },
+          },
+          {
+            filter: 'multiSelect',
+            tooltip: 'Select one or more specific plans for the provider.',
+          },
+          {
+            size: 120,
+          },
+        ),
+        colApi(
+          'apiType',
+          {
+            label: 'API Type',
+            icon: {
+              primary: { filename: `settings.svg` },
+              fallback: { lucide: l.Settings2 },
+            },
+          },
+          {
+            filter: 'multiSelect',
+            tooltip: 'Select one or more available API types for the provider.',
+          },
+          {
+            size: 115,
+          },
+        ),
+        colApi(
+          'technology',
+          {
+            label: 'Technology',
+            icon: { primary: { lucide: l.Cpu } },
+          },
+          {
+            filter: 'multiSelect',
+            tooltip: 'Select one or more technologies.',
+          },
+        ),
+        colApi(
           'regions',
           {
             label: 'Regions',
@@ -234,7 +257,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           {
             filter: 'multiSelect',
             tooltip: 'Filter providers by supported regions of operation.',
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <ArrayCellPopover
                 ctx={c}
                 value={c.row.original.regions}
@@ -243,7 +266,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             ),
           },
         ),
-        colRpc(
+        colApi(
           'accessPrice',
           {
             label: 'Access Price',
@@ -257,12 +280,12 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             filter: 'range',
             tooltip:
               'Set a range for the access price (subscription or base fee).',
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <NumericRangeCell ctx={c} suffix={'$'} />
             ),
           },
         ),
-        colRpc(
+        colApi(
           'queryPrice',
           {
             label: 'Query Price',
@@ -271,14 +294,13 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           {
             filter: undefined,
             tooltip: 'Set a range for the query price (per API call).',
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <NumericRangeCell ctx={c} suffix={'$'} />
             ),
           },
         ),
-        colRpc(
+        colApi(
           'trial',
-
           {
             label: 'Trial',
             icon: {
@@ -291,7 +313,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             tooltip: 'Filter providers offering a free trial.',
           },
         ),
-        colRpc(
+        colApi(
           'uptimeSla',
           {
             label: 'Uptime SLA',
@@ -299,14 +321,14 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.Activity } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <UptimeSla ctx={c} />
             ),
             filter: undefined,
             tooltip: 'Minimum guaranteed uptime SLA of the provider.',
           },
         ),
-        colRpc(
+        colApi(
           'verifiedUptime',
           {
             label: 'Verified Uptime',
@@ -314,14 +336,14 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.AlarmClockCheck } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <VerifiedUptime ctx={c} />
             ),
             filter: undefined,
             tooltip: 'Actual verified uptime recorded for the provider.',
           },
         ),
-        colRpc(
+        colApi(
           'bandwidthSla',
           {
             label: 'Bandwidth SLA',
@@ -329,14 +351,14 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.SquareActivity } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <BandwidthSla ctx={c} />
             ),
             filter: undefined,
             tooltip: 'Guaranteed bandwidth capacity in SLA terms.',
           },
         ),
-        colRpc(
+        colApi(
           'blocksBehindSla',
           {
             label: 'Blocks Behind SLA',
@@ -344,7 +366,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.DatabaseZap } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <BlocksBehindSla ctx={c} />
             ),
             filter: undefined,
@@ -352,7 +374,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
               'Maximum allowed number of blocks behind the latest block.',
           },
         ),
-        colRpc(
+        colApi(
           'verifiedBlocksBehindAvg',
           {
             label: 'Verified Blocks Behind Avg.',
@@ -360,12 +382,12 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.ChartBarBig } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <VerifiedBlocksBehindAverage ctx={c} />
             ),
           },
         ),
-        colRpc(
+        colApi(
           'verifiedLatency',
           {
             label: 'Verified Latency',
@@ -373,19 +395,38 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.Gauge } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <VerifiedLatency ctx={c} />
             ),
           },
         ),
-        colRpc(
+        colApi(
+          'supportSla',
+          {
+            label: 'Support SLA',
+            icon: { primary: { lucide: l.CalendarClock } },
+          },
+          {},
+        ),
+        colApi(
+          'historicalData',
+          {
+            label: 'Historical Data',
+            icon: { primary: { lucide: l.Database } },
+          },
+          {
+            filter: 'multiSelect',
+            tooltip: 'Select one or more historical data types.',
+          },
+        ),
+        colApi(
           'availableApis',
           {
             label: 'Available APIs',
             icon: { primary: { lucide: l.Webhook } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <ArrayCellPopover
                 ctx={c}
                 value={c.row.original.availableApis}
@@ -394,14 +435,30 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             ),
           },
         ),
-        colRpc(
+        colApi(
+          'limitations',
+          {
+            label: 'Limitations',
+            icon: { primary: { lucide: l.ShieldAlert } },
+          },
+          {
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+              <ArrayCellPopover
+                ctx={c}
+                value={c.row.original.limitations}
+                title='Limitations:'
+              />
+            ),
+          },
+        ),
+        colApi(
           'securityImprovements',
           {
             label: 'Security Improvements',
             icon: { primary: { lucide: l.Shield } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <ArrayCellPopover
                 ctx={c}
                 value={c.row.original.securityImprovements}
@@ -410,14 +467,14 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             ),
           },
         ),
-        colRpc(
+        colApi(
           'monitoringAndAnalytics',
           {
             label: 'Monitoring & Analytics',
             icon: { primary: { lucide: l.BarChart } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <ArrayCellPopover
                 ctx={c}
                 value={c.row.original.monitoringAndAnalytics}
@@ -426,369 +483,14 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             ),
           },
         ),
-        colRpc(
-          'limitations',
-          {
-            label: 'Limitations',
-            icon: { primary: { lucide: l.ShieldAlert } },
-          },
-          {
-            component: (c: CellContext<CategoryEntityMap['rpc'], unknown>) => (
-              <ArrayCellPopover
-                ctx={c}
-                value={c.row.original.limitations}
-                title='Limitations:'
-              />
-            ),
-          },
-        ),
-      ];
-
-      return cols;
-    },
-  },
-
-  indexing: {
-    id: 'indexing',
-    label: 'Indexing',
-    icon: {
-      primary: { filename: `indexing.svg` },
-      fallback: { lucide: l.TextQuote },
-    },
-    description:
-      'Services to search, filter, and access structured blockchain data.',
-    initialState: {},
-    getColumns: () => {
-      const cols: Column<
-        keyof CategoryEntityMap['indexing'] & string,
-        CategoryEntityMap['indexing']
-      >[] = [
-        colIdx(
-          'provider',
-          {
-            label: 'Provider',
-            icon: { primary: { lucide: l.Unplug } },
-            selectAllRows: true,
-          },
-          {
-            component: c => <ProviderCell ctx={c} />,
-          },
-          {
-            size: 200,
-          },
-        ),
-        colIdx(
-          'actionButtons',
-          { label: 'Actions', sort: 'off' },
-          {
-            component: (c: CellContext<any, unknown>) => (
-              <ActionButton
-                ctx={c}
-                actionButtons={c.row.original.actionButtons}
-              />
-            ),
-          },
-          {
-            size: 80,
-          },
-        ),
-        colIdx(
-          'address',
-          {
-            label: 'Address',
-            icon: { primary: { lucide: l.SquareUserRound } },
-          },
-          {
-            component: (c: CellContext<any, unknown>) => (
-              <>
-                {c.row.original.address ? (
-                  <AccountAddress
-                    maxAddressLength={120}
-                    accountAddress={c.row.original.address || ''}
-                  />
-                ) : (
-                  '—'
-                )}
-              </>
-            ),
-          },
-        ),
-
-        colIdx('chain', {
-          label: 'Chain',
-          icon: { primary: { lucide: l.Link } },
-        }),
-
-        colIdx(
-          'regions',
-          {
-            label: 'Regions',
-            icon: {
-              primary: { filename: `regions.svg` },
-              fallback: { lucide: l.Globe },
-            },
-          },
-          {
-            filter: 'multiSelect',
-            tooltip: 'Filter providers by supported regions of operation.',
-            component: (
-              c: CellContext<CategoryEntityMap['indexing'], unknown>,
-            ) => (
-              <ArrayCellPopover
-                ctx={c}
-                value={c.row.original.regions}
-                title='Regions:'
-              />
-            ),
-          },
-        ),
-        colIdx(
-          'technology',
-          {
-            label: 'Technology',
-            icon: { primary: { lucide: l.Cpu } },
-          },
-          {
-            filter: 'multiSelect',
-            tooltip: 'Select one or more indexing technologies.',
-          },
-        ),
-        colIdx(
-          'plan',
-          {
-            label: 'Plan',
-            icon: {
-              primary: { filename: `plan.svg` },
-              fallback: { lucide: l.NotepadText },
-            },
-          },
-          {
-            filter: 'multiSelect',
-            tooltip: 'Select one or more available plans for the provider.',
-          },
-        ),
-        colIdx(
-          'accessPrice',
-          {
-            label: 'Access Price',
-            sort: priceSort,
-            icon: {
-              primary: { filename: `access-price.svg` },
-              fallback: { lucide: l.Receipt },
-            },
-          },
-          {
-            filter: 'range',
-            tooltip:
-              'Set a range for the access price (subscription or base fee).',
-            component: (
-              c: CellContext<CategoryEntityMap['indexing'], unknown>,
-            ) => <NumericRangeCell ctx={c} suffix={'$'} />,
-          },
-        ),
-        colIdx(
-          'queryPrice',
-          {
-            label: 'Query Price',
-            icon: { primary: { lucide: l.ReceiptCent } },
-          },
-          {
-            filter: undefined,
-            tooltip: 'Set a range for the query price (per API call).',
-            component: (
-              c: CellContext<CategoryEntityMap['indexing'], unknown>,
-            ) => <NumericRangeCell ctx={c} suffix={'$'} />,
-          },
-        ),
-        colIdx(
-          'trial',
-
-          {
-            label: 'Trial',
-            icon: {
-              primary: { filename: `trial.svg` },
-              fallback: { lucide: l.Tag },
-            },
-          },
-          {
-            filter: 'select',
-            tooltip: 'Filter providers offering a free trial.',
-          },
-        ),
-        colIdx('supportSla', {
-          label: 'Support SLA',
-          icon: { primary: { lucide: l.CalendarClock } },
-        }),
-        colIdx(
-          'uptimeSla',
-          {
-            label: 'Uptime SLA',
-            sort: 'off',
-            icon: { primary: { lucide: l.Activity } },
-          },
-          {
-            component: (c: CellContext<any, unknown>) => <UptimeSla ctx={c} />,
-            filter: undefined,
-            tooltip: 'Minimum guaranteed uptime SLA for the indexing.',
-          },
-        ),
-        colIdx(
-          'verifiedUptime',
-          {
-            label: 'Verified Uptime',
-            sort: 'off',
-            icon: { primary: { lucide: l.AlarmClockCheck } },
-          },
-          {
-            component: (c: CellContext<any, unknown>) => (
-              <VerifiedUptime ctx={c} />
-            ),
-            filter: undefined,
-            tooltip: 'Actual verified uptime recorded for the provider.',
-          },
-        ),
-        colIdx(
-          'bandwidthSla',
-          {
-            label: 'Bandwidth SLA',
-            sort: 'off',
-            icon: { primary: { lucide: l.SquareActivity } },
-          },
-          {
-            component: (c: CellContext<any, unknown>) => (
-              <BandwidthSla ctx={c} />
-            ),
-            filter: undefined,
-            tooltip: 'Guaranteed bandwidth capacity in SLA terms.',
-          },
-        ),
-        colIdx(
-          'blocksBehindSla',
-          {
-            label: 'Blocks Behind SLA',
-            sort: 'off',
-            icon: { primary: { lucide: l.DatabaseZap } },
-          },
-          {
-            component: (c: CellContext<any, unknown>) => (
-              <BlocksBehindSla ctx={c} />
-            ),
-            filter: undefined,
-            tooltip:
-              'Maximum allowed number of blocks behind the latest block.',
-          },
-        ),
-        colIdx(
-          'verifiedLatency',
-          {
-            label: 'Verified Latency',
-            sort: 'off',
-            icon: { primary: { lucide: l.Gauge } },
-          },
-          {
-            component: (c: CellContext<any, unknown>) => (
-              <BlocksBehindSla ctx={c} />
-            ),
-            filter: undefined,
-            tooltip:
-              'Maximum allowed number of blocks behind the latest block.',
-          },
-        ),
-        colIdx(
-          'verifiedBlocksBehindAvg',
-          {
-            label: 'Verified Blocks Behind Avg.',
-            sort: 'off',
-            icon: { primary: { lucide: l.ChartBarBig } },
-          },
-          {
-            component: (c: CellContext<any, unknown>) => (
-              <VerifiedBlocksBehindAverage ctx={c} />
-            ),
-          },
-        ),
-        colIdx(
-          'availableApis',
-          {
-            label: 'Available APIs',
-            icon: { primary: { lucide: l.Webhook } },
-          },
-          {
-            component: (
-              c: CellContext<CategoryEntityMap['indexing'], unknown>,
-            ) => (
-              <ArrayCellPopover
-                ctx={c}
-                value={c.row.original.availableApis}
-                title='Available APIs:'
-              />
-            ),
-          },
-        ),
-        colIdx(
-          'limitations',
-          {
-            label: 'Limitations',
-            icon: { primary: { lucide: l.ShieldAlert } },
-          },
-          {
-            component: (
-              c: CellContext<CategoryEntityMap['indexing'], unknown>,
-            ) => (
-              <ArrayCellPopover
-                ctx={c}
-                value={c.row.original.limitations}
-                title='Limitations:'
-              />
-            ),
-          },
-        ),
-        colIdx(
-          'securityImprovements',
-          {
-            label: 'Security Improvements',
-            icon: { primary: { lucide: l.Shield } },
-          },
-          {
-            component: (
-              c: CellContext<CategoryEntityMap['indexing'], unknown>,
-            ) => (
-              <ArrayCellPopover
-                ctx={c}
-                value={c.row.original.securityImprovements}
-                title='Security Improvements'
-              />
-            ),
-          },
-        ),
-        colIdx(
-          'monitoringAndAnalytics',
-          {
-            label: 'Monitoring & Analytics',
-            icon: { primary: { lucide: l.BarChart } },
-          },
-          {
-            component: (
-              c: CellContext<CategoryEntityMap['indexing'], unknown>,
-            ) => (
-              <ArrayCellPopover
-                ctx={c}
-                value={c.row.original.monitoringAndAnalytics}
-                title='Monitoring & Analytics'
-              />
-            ),
-          },
-        ),
-        colIdx(
+        colApi(
           'additionalFeatures',
           {
             label: 'Additional Features',
             icon: { primary: { lucide: l.Lightbulb } },
           },
           {
-            component: (
-              c: CellContext<CategoryEntityMap['indexing'], unknown>,
-            ) => (
+            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
               <ArrayCellPopover
                 ctx={c}
                 value={c.row.original.additionalFeatures}

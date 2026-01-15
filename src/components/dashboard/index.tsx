@@ -81,7 +81,7 @@ export default function Dashboard() {
   }, [selectedCategoryId, currentCategoryData, hiddenByConfig]);
 
   const { table } = useCategoryTable(
-    selectedCategoryId ?? 'rpc',
+    selectedCategoryId ?? 'api',
     currentCategoryData,
     initialVisibility,
   );
@@ -128,7 +128,7 @@ export default function Dashboard() {
         <div className='rounded-xl bg-gray-1'>
           <TopFiltersBar
             table={table}
-            selectedCategoryId={selectedCategoryId ?? 'rpc'}
+            selectedCategoryId={selectedCategoryId ?? 'api'}
             onCategoryChange={id => {
               setSelectedCategoryId(id);
               resetAll();
@@ -163,7 +163,7 @@ export default function Dashboard() {
           slug: r.slug,
           provider: r.provider,
         }))}
-        categoryId={(selectedCategoryId ?? 'rpc') as CategoryKey}
+        categoryId={(selectedCategoryId ?? 'api') as CategoryKey}
       />
     </div>
   );

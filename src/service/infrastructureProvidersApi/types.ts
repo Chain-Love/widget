@@ -1,8 +1,7 @@
 import { z } from 'zod';
 
 import type {
-  Rpc,
-  Indexing,
+  Api,
   Explorer,
   Oracle,
   Bridge,
@@ -13,8 +12,7 @@ import type {
 } from './infrastructure.types';
 
 export type CategoryDataMap = {
-  rpc: Rpc;
-  indexing: Indexing;
+  api: Api;
   explorer: Explorer;
   oracle: Oracle;
   bridge: Bridge;
@@ -27,8 +25,7 @@ export type CategoryDataMap = {
 export type CategoryKey = keyof CategoryDataMap;
 
 export const categorySchema = z.enum([
-  'rpc',
-  'indexing',
+  'api',
   'explorer',
   'oracle',
   'bridge',
