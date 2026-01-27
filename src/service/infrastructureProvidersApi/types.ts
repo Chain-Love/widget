@@ -5,7 +5,8 @@ import type {
   Explorer,
   Oracle,
   Bridge,
-  DevTool,
+  Service,
+  SDK,
   Faucet,
   Analytic,
   Wallet,
@@ -16,7 +17,8 @@ export type CategoryDataMap = {
   explorer: Explorer;
   oracle: Oracle;
   bridge: Bridge;
-  devTool: DevTool;
+  service: Service;
+  sdk: SDK;
   faucet: Faucet;
   analytic: Analytic;
   wallet: Wallet;
@@ -29,7 +31,8 @@ export const categorySchema = z.enum([
   'explorer',
   'oracle',
   'bridge',
-  'devTool',
+  'service',
+  'sdk',
   'faucet',
   'analytic',
   'wallet',

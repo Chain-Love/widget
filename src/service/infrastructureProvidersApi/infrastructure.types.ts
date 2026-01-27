@@ -10,7 +10,8 @@ export interface ToolboxNetworkData {
   explorer?: Explorer[];
   oracle?: Oracle[];
   bridge?: Bridge[];
-  devTool?: DevTool[];
+  service?: Service[];
+  sdk?: SDK[];
   faucet?: Faucet[];
   analytic?: Analytic[];
   wallet?: Wallet[];
@@ -102,15 +103,36 @@ export interface Bridge {
   sdk: string[] | null;
   actionButtons: string[] | null;
 }
-export interface DevTool {
+export interface Service {
   slug: string;
   provider: string;
   toolType: string;
+  planType: string;
+  description: string;
   price: string | null;
   tag: string[] | null;
-  description: string | null;
   starred: boolean;
   actionButtons: string[] | null;
+  planName: string | null;
+}
+export interface SDK {
+  slug: string;
+  provider: string;
+  toolType: string;
+  description: string;
+  planType: string;
+  programmingLanguage: string;
+  price: string | null;
+  tag: string[] | null;
+  starred: boolean;
+  actionButtons: string[] | null;
+  planName: string | null;
+  trial: boolean;
+  dependencies: string | null;
+  latestKnownVersion: string | null;
+  latestKnownReleaseDate: string | null;
+  maintainer: string | null;
+  license: string | null;
 }
 export interface Faucet {
   slug: string;

@@ -8,6 +8,7 @@ import UptimeSla from './fields/shared/uptime-sla';
 import BandwidthSla from './fields/shared/bandwidth-sla';
 import BlocksBehindSla from './fields/shared/blocks-behind-sla';
 import VerifiedUptime from './fields/shared/verified-uptime';
+import PlanTypeCell from './fields/shared/plan-type-cell';
 import * as l from 'lucide-react';
 import {
   multiSelect,
@@ -98,7 +99,8 @@ const colApi = colFor<'api'>();
 const colExp = colFor<'explorer'>();
 const colOra = colFor<'oracle'>();
 const colBr = colFor<'bridge'>();
-const colDev = colFor<'devTool'>();
+const colSvc = colFor<'service'>();
+const colSdk = colFor<'sdk'>();
 const colFau = colFor<'faucet'>();
 const colAnl = colFor<'analytic'>();
 const colWlt = colFor<'wallet'>();
@@ -1222,23 +1224,23 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
   },
 
-  devTool: {
-    id: 'devTool',
-    label: 'Dev Tooling',
+  service: {
+    id: 'service',
+    label: 'Services',
     icon: {
-      primary: { filename: `dev-tool.svg` },
+      primary: { filename: `services.svg` },
       fallback: { lucide: l.CodeXml },
     },
-    description: 'SDKs, APIs, libraries, and utilities for developers.',
+    description: 'Development platforms, tools, and services for developers.',
     initialState: {
       columnVisibility: {},
     },
     getColumns: () => {
       const cols: Column<
-        keyof CategoryEntityMap['devTool'] & string,
-        CategoryEntityMap['devTool']
+        keyof CategoryEntityMap['service'] & string,
+        CategoryEntityMap['service']
       >[] = [
-        colDev(
+        colSvc(
           'provider',
           {
             label: 'Provider',
@@ -1252,7 +1254,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             size: 120,
           },
         ),
-        colDev(
+        colSvc(
           'actionButtons',
           {
             label: 'Actions',
@@ -1261,7 +1263,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['devTool'], unknown>,
+              c: CellContext<CategoryEntityMap['service'], unknown>,
             ) => (
               <ActionButton
                 ctx={c}
@@ -1273,18 +1275,18 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             size: 80,
           },
         ),
-        colDev(
+        colSvc(
           'tag',
           { label: 'Tags', icon: { primary: { lucide: l.Tags } } },
           {
             filter: 'multiSelect',
             tooltip: 'Select one or more tags of developer tools.',
             component: (
-              c: CellContext<CategoryEntityMap['devTool'], unknown>,
+              c: CellContext<CategoryEntityMap['service'], unknown>,
             ) => <TagsCellPopover value={c.row.original.tag} title='Tags:' />,
           },
         ),
-        colDev(
+        colSvc(
           'toolType',
           { label: 'Tool Type', icon: { primary: { lucide: l.Wrench } } },
           {
@@ -1292,14 +1294,199 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             tooltip: 'Select one or more types of developer tools.',
           },
         ),
-
-        colDev('price', {
+        colSvc(
+          'planType',
+          {
+            label: 'Plan Type',
+            icon: {
+              primary: { filename: `plan.svg` },
+              fallback: { lucide: l.NotepadText },
+            },
+          },
+          {
+            filter: 'multiSelect',
+            tooltip:
+              'Select one or more available plan types for the provider.',
+            component: (c: CellContext<CategoryEntityMap['service'], unknown>) => (
+              <PlanTypeCell ctx={c} />
+            ),
+          },
+          {
+            size: 100,
+          },
+        ),
+        colSvc(
+          'planName',
+          {
+            label: 'Plan Name',
+            icon: {
+              primary: { filename: `plan.svg` },
+              fallback: { lucide: l.NotepadText },
+            },
+          },
+         ),
+        colSvc('price', {
           label: 'Price',
           icon: { primary: { lucide: l.BadgeDollarSign } },
         }),
-        colDev('description', {
+        colSvc('description', {
           label: 'Description',
           icon: { primary: { lucide: l.MessageSquareText } },
+        }),
+      ];
+
+      return cols;
+    },
+  },
+
+  sdk: {
+    id: 'sdk',
+    label: 'SDKs',
+    icon: {
+      primary: { filename: `sdk.svg` },
+      fallback: { lucide: l.CodeXml },
+    },
+    description: 'SDKs, frameworks, and libraries for developers.',
+    initialState: {
+      columnVisibility: {},
+    },
+    getColumns: () => {
+      const cols: Column<
+        keyof CategoryEntityMap['sdk'] & string,
+        CategoryEntityMap['sdk']
+      >[] = [
+        colSdk(
+          'provider',
+          {
+            label: 'Provider',
+            icon: { primary: { lucide: l.Unplug } },
+            selectAllRows: true,
+          },
+          {
+            component: c => <ProviderCell ctx={c} />,
+          },
+          {
+            size: 120,
+          },
+        ),
+        colSdk(
+          'actionButtons',
+          {
+            label: 'Actions',
+            sort: 'off',
+            icon: { primary: { lucide: l.Navigation } },
+          },
+          {
+            component: (
+              c: CellContext<CategoryEntityMap['sdk'], unknown>,
+            ) => (
+              <ActionButton
+                ctx={c}
+                actionButtons={c.row.original.actionButtons}
+              />
+            ),
+          },
+          {
+            size: 80,
+          },
+        ),
+        colSdk(
+          'tag',
+          { label: 'Tags', icon: { primary: { lucide: l.Tags } } },
+          {
+            filter: 'multiSelect',
+            tooltip: 'Select one or more tags of developer tools.',
+            component: (
+              c: CellContext<CategoryEntityMap['sdk'], unknown>,
+            ) => <TagsCellPopover value={c.row.original.tag} title='Tags:' />,
+          },
+        ),
+        colSdk(
+          'toolType',
+          { label: 'Tool Type', icon: { primary: { lucide: l.Wrench } } },
+          {
+            filter: 'multiSelect',
+            tooltip: 'Select one or more types of developer tools.',
+          },
+        ),
+        colSdk(
+          'planType',
+          {
+            label: 'Plan Type',
+            icon: {
+              primary: { filename: `plan.svg` },
+              fallback: { lucide: l.NotepadText },
+            },
+          },
+          {
+            filter: 'multiSelect',
+            tooltip:
+              'Select one or more available plan types for the provider.',
+            component: (c: CellContext<CategoryEntityMap['sdk'], unknown>) => (
+              <PlanTypeCell ctx={c} />
+            ),
+          },
+          {
+            size: 100,
+          },
+        ),
+        colSdk(
+          'planName',
+          {
+            label: 'Plan Name',
+            icon: {
+              primary: { filename: `plan.svg` },
+              fallback: { lucide: l.NotepadText },
+            },
+          },
+        ),
+        colSdk('price', {
+          label: 'Price',
+          icon: { primary: { lucide: l.BadgeDollarSign } },
+        }),
+        colSdk(
+          'trial',
+          {
+            label: 'Trial',
+            icon: {
+              primary: { filename: `trial.svg` },
+              fallback: { lucide: l.Tag },
+            },
+          },
+        ),
+        colSdk('programmingLanguage', {
+          label: 'Programming Language',
+          icon: { primary: { lucide: l.Code } },
+          
+        },
+          {
+            filter: 'multiSelect',
+            tooltip: 'Select one or more programming languages supported by the SDK.',
+          },
+        ),
+        colSdk('description', {
+          label: 'Description',
+          icon: { primary: { lucide: l.MessageSquareText } },
+        }),
+        colSdk('dependencies', {
+          label: 'Dependencies',
+          icon: { primary: { lucide: l.Package } },
+        }),
+        colSdk('latestKnownVersion', {
+          label: 'Latest Version',
+          icon: { primary: { lucide: l.Tag } },
+        }),
+        colSdk('latestKnownReleaseDate', {
+          label: 'Release Date',
+          icon: { primary: { lucide: l.Calendar } },
+        }),
+        colSdk('maintainer', {
+          label: 'Maintainer',
+          icon: { primary: { lucide: l.User } },
+        }),
+        colSdk('license', {
+          label: 'License',
+          icon: { primary: { lucide: l.FileText } },
         }),
       ];
 

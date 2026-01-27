@@ -9,7 +9,8 @@
     "explorer": { "type": "array", "items": { "$ref": "#/$defs/explorer" } },
     "oracle": { "type": "array", "items": { "$ref": "#/$defs/oracle" } },
     "bridge": { "type": "array", "items": { "$ref": "#/$defs/bridge" } },
-    "devTool": { "type": "array", "items": { "$ref": "#/$defs/devTool" } },
+    "service": { "type": "array", "items": { "$ref": "#/$defs/service" } },
+    "sdk": { "type": "array", "items": { "$ref": "#/$defs/sdk" } },
     "faucet": { "type": "array", "items": { "$ref": "#/$defs/faucet" } },
     "analytic": { "type": "array", "items": { "$ref": "#/$defs/analytic" } },
     "wallet": { "type": "array", "items": { "$ref": "#/$defs/wallet" } }
@@ -281,32 +282,81 @@
       ]
     },
 
-    "devTool": {
-      "title": "DevTool",
+    "service": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
         "slug": { "type": "string" },
         "provider": { "type": "string" },
         "toolType": { "type": "string" },
+        "planType": { "type": "string" },
+        "description": { "type": "string" },
         "price": { "type": ["string", "null"] },
         "tag": { "type": ["array", "null"], "items": { "type": "string" } },
-        "description": { "type": ["string", "null"] },
         "starred": { "type": "boolean" },
         "actionButtons": {
           "type": ["array", "null"],
           "items": { "type": "string" }
-        }
+        },
+        "planName": { "type": ["string", "null"] }
       },
       "required": [
         "slug",
         "provider",
         "toolType",
+        "planType",
+        "description",
         "price",
         "tag",
-        "description",
         "starred",
-        "actionButtons"
+        "actionButtons",
+        "planName"
+      ]
+    },
+
+    "sdk": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "slug": { "type": "string" },
+        "provider": { "type": "string" },
+        "toolType": { "type": "string" },
+        "description": { "type": "string" },
+        "planType": { "type": "string" },
+        "programmingLanguage": { "type": "string" },
+        "price": { "type": ["string", "null"] },
+        "tag": { "type": ["array", "null"], "items": { "type": "string" } },
+        "starred": { "type": "boolean" },
+        "actionButtons": {
+          "type": ["array", "null"],
+          "items": { "type": "string" }
+        },
+        "planName": { "type": ["string", "null"] },
+        "trial": { "type": "boolean" },
+        "dependencies": { "type": ["string", "null"] },
+        "latestKnownVersion": { "type": ["string", "null"] },
+        "latestKnownReleaseDate": { "type": ["string", "null"] },
+        "maintainer": { "type": ["string", "null"] },
+        "license": { "type": ["string", "null"] }
+      },
+      "required": [
+        "slug",
+        "provider",
+        "toolType",
+        "description",
+        "planType",
+        "programmingLanguage",
+        "price",
+        "tag",
+        "starred",
+        "actionButtons",
+        "planName",
+        "trial",
+        "dependencies",
+        "latestKnownVersion",
+        "latestKnownReleaseDate",
+        "maintainer",
+        "license"
       ]
     },
 
