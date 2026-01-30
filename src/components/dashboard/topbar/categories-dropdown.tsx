@@ -36,8 +36,7 @@ export default function CategoriesDropdown({
     <div className='grid grid-cols-2 md:grid-cols-3 2xl:grid-cols-2 [&>*:not(:last-child)]:border-b'>
       {availableCategories.map(c => {
         const isSelected = c.key === selectedCategoryId;
-        const fullLabel = CATEGORIES[c.key]?.label ?? c.key;
-        const shortLabel = c.key === 'api' ? 'API' : fullLabel;
+        const label = CATEGORIES[c.key]?.label ?? c.key;
 
         return (
           <Button
@@ -88,7 +87,7 @@ export default function CategoriesDropdown({
 
                 {/* Title → column 2 */}
                 <span className='order-2 min-w-0 font-medium tracking-tight group-hover:text-accent-9'>
-                  {shortLabel}
+                  {label}
                 </span>
               </div>
 

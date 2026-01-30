@@ -108,7 +108,7 @@ const colWlt = colFor<'wallet'>();
 export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
   api: {
     id: 'api',
-    label: 'API',
+    label: 'APIs',
     icon: {
       primary: { filename: `rpc.svg` },
       fallback: { lucide: l.Network },
