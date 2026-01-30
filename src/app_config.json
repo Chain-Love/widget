@@ -309,7 +309,8 @@
       "decentralizationModel",
       "sdk"
     ],
-    "devTool": [],
+    "service": [],
+    "sdk": [],
     "faucet": ["hasCaptcha", "requiresMainnetBalance"],
     "analytic": [],
     "wallet": [
