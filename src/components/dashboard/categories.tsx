@@ -1468,10 +1468,22 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           label: 'Description',
           icon: { primary: { lucide: l.MessageSquareText } },
         }),
-        colSdk('dependencies', {
+        colSdk(
+          'dependencies',
+          {
           label: 'Dependencies',
           icon: { primary: { lucide: l.Package } },
-        }),
+          },
+          {
+            component: (c: CellContext<CategoryEntityMap['sdk'], unknown>) => (
+              <ArrayCellPopover
+                value={c.row.original.dependencies}
+                title='Dependencies:'
+                ctx={c}
+              />
+            ),
+          },
+        ),
         colSdk('latestKnownVersion', {
           label: 'Latest Version',
           icon: { primary: { lucide: l.Tag } },

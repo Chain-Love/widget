@@ -128,7 +128,7 @@ export interface SDK {
   actionButtons: string[] | null;
   planName: string | null;
   trial: boolean;
-  dependencies: string | null;
+  dependencies: string[] | null;
   latestKnownVersion: string | null;
   latestKnownReleaseDate: string | null;
   maintainer: string | null;

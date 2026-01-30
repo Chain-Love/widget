@@ -333,7 +333,10 @@
         },
         "planName": { "type": ["string", "null"] },
         "trial": { "type": "boolean" },
-        "dependencies": { "type": ["string", "null"] },
+        "dependencies": {
+          "type": ["array", "null"],
+          "items": { "type": "string" }
+        },
         "latestKnownVersion": { "type": ["string", "null"] },
         "latestKnownReleaseDate": { "type": ["string", "null"] },
         "maintainer": { "type": ["string", "null"] },
