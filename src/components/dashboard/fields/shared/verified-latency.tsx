@@ -7,7 +7,7 @@ import {
 } from '@/components/ui/shadcn/popover';
 
 export default function VerifiedLatency({}: CellProps<
-  CategoryEntityMap['api']
+  CategoryEntityMap['apis']
 >) {
   return (
     <PopoverTooltip>
