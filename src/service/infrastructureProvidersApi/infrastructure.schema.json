@@ -5,18 +5,18 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "api": { "type": "array", "items": { "$ref": "#/$defs/api" } },
-    "explorer": { "type": "array", "items": { "$ref": "#/$defs/explorer" } },
-    "oracle": { "type": "array", "items": { "$ref": "#/$defs/oracle" } },
-    "bridge": { "type": "array", "items": { "$ref": "#/$defs/bridge" } },
-    "service": { "type": "array", "items": { "$ref": "#/$defs/service" } },
-    "sdk": { "type": "array", "items": { "$ref": "#/$defs/sdk" } },
-    "faucet": { "type": "array", "items": { "$ref": "#/$defs/faucet" } },
-    "analytic": { "type": "array", "items": { "$ref": "#/$defs/analytic" } },
-    "wallet": { "type": "array", "items": { "$ref": "#/$defs/wallet" } }
+    "apis": { "type": "array", "items": { "$ref": "#/$defs/apis" } },
+    "explorers": { "type": "array", "items": { "$ref": "#/$defs/explorers" } },
+    "oracles": { "type": "array", "items": { "$ref": "#/$defs/oracles" } },
+    "bridges": { "type": "array", "items": { "$ref": "#/$defs/bridges" } },
+    "services": { "type": "array", "items": { "$ref": "#/$defs/services" } },
+    "sdks": { "type": "array", "items": { "$ref": "#/$defs/sdks" } },
+    "faucets": { "type": "array", "items": { "$ref": "#/$defs/faucets" } },
+    "analytics": { "type": "array", "items": { "$ref": "#/$defs/analytics" } },
+    "wallets": { "type": "array", "items": { "$ref": "#/$defs/wallets" } }
   },
   "$defs": {
-    "api": {
+    "apis": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -97,7 +97,7 @@
       ]
     },
 
-    "explorer": {
+    "explorers": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -149,7 +149,7 @@
       ]
     },
 
-    "oracle": {
+    "oracles": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -210,7 +210,7 @@
       ]
     },
 
-    "bridge": {
+    "bridges": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -282,7 +282,7 @@
       ]
     },
 
-    "service": {
+    "services": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -314,7 +314,7 @@
       ]
     },
 
-    "sdk": {
+    "sdks": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -363,7 +363,7 @@
       ]
     },
 
-    "faucet": {
+    "faucets": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -402,7 +402,7 @@
       ]
     },
 
-    "analytic": {
+    "analytics": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -438,7 +438,7 @@
       ]
     },
 
-    "wallet": {
+    "wallets": {
       "type": "object",
       "additionalProperties": false,
       "properties": {

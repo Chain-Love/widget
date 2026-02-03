@@ -268,7 +268,7 @@
   },
 
   "hiddenColumns": {
-    "api": [
+    "apis": [
       "supportSla",
       "address",
       "uptimeSla",
@@ -284,8 +284,8 @@
       "verifiedLatency",
       "verifiedBlocksBehindAvg"
     ],
-    "explorer": ["availableApis", "sdk", "pricing"],
-    "oracle": [
+    "explorers": ["availableApis", "sdk", "pricing"],
+    "oracles": [
       "availableApis",
       "monitoringAndAnalytics",
       "additionalFeatures",
@@ -296,7 +296,7 @@
       "sdk",
       "auditsPerformed"
     ],
-    "bridge": [
+    "bridges": [
       "openSource",
       "availableApis",
       "monitoringAndAnalytics",
@@ -309,11 +309,11 @@
       "decentralizationModel",
       "sdk"
     ],
-    "service": [],
-    "sdk": [],
-    "faucet": ["hasCaptcha", "requiresMainnetBalance"],
-    "analytic": [],
-    "wallet": [
+    "services": [],
+    "sdks": [],
+    "faucets": ["hasCaptcha", "requiresMainnetBalance"],
+    "analytics": [],
+    "wallets": [
       "openSource",
       "custodial",
       "keyExport",

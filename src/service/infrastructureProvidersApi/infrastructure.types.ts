@@ -6,17 +6,17 @@
  */
 
 export interface ToolboxNetworkData {
-  api?: Api[];
-  explorer?: Explorer[];
-  oracle?: Oracle[];
-  bridge?: Bridge[];
-  service?: Service[];
-  sdk?: SDK[];
-  faucet?: Faucet[];
-  analytic?: Analytic[];
-  wallet?: Wallet[];
+  apis?: Apis[];
+  explorers?: Explorers[];
+  oracles?: Oracles[];
+  bridges?: Bridges[];
+  services?: Services[];
+  sdks?: SDKs[];
+  faucets?: Faucets[];
+  analytics?: Analytics[];
+  wallets?: Wallets[];
 }
-export interface Api {
+export interface Apis {
   slug: string;
   provider: string;
   apiType: string;
@@ -45,7 +45,7 @@ export interface Api {
   verifiedBlocksBehindAvg: string | null;
   actionButtons: string[] | null;
 }
-export interface Explorer {
+export interface Explorers {
   slug: string;
   provider: string;
   chain: string;
@@ -61,7 +61,7 @@ export interface Explorer {
   pricing: string | null;
   actionButtons: string[] | null;
 }
-export interface Oracle {
+export interface Oracles {
   slug: string;
   provider: string;
   chain: string;
@@ -80,7 +80,7 @@ export interface Oracle {
   auditsPerformed: string[] | null;
   actionButtons: string[] | null;
 }
-export interface Bridge {
+export interface Bridges {
   slug: string;
   provider: string;
   chain: string;
@@ -103,7 +103,7 @@ export interface Bridge {
   sdk: string[] | null;
   actionButtons: string[] | null;
 }
-export interface Service {
+export interface Services {
   slug: string;
   provider: string;
   toolType: string;
@@ -115,7 +115,7 @@ export interface Service {
   actionButtons: string[] | null;
   planName: string | null;
 }
-export interface SDK {
+export interface SDKs {
   slug: string;
   provider: string;
   toolType: string;
@@ -134,7 +134,7 @@ export interface SDK {
   maintainer: string | null;
   license: string | null;
 }
-export interface Faucet {
+export interface Faucets {
   slug: string;
   provider: string;
   chain: string;
@@ -148,7 +148,7 @@ export interface Faucet {
   starred: boolean;
   actionButtons: string[] | null;
 }
-export interface Analytic {
+export interface Analytics {
   slug: string;
   provider: string;
   chain: string;
@@ -159,7 +159,7 @@ export interface Analytic {
   starred: boolean;
   actionButtons: string[] | null;
 }
-export interface Wallet {
+export interface Wallets {
   slug: string;
   provider: string;
   openSource: boolean;

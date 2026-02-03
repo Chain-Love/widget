@@ -95,19 +95,19 @@ export function colFor<C extends CategoryKey>() {
   });
 }
 
-const colApi = colFor<'api'>();
-const colExp = colFor<'explorer'>();
-const colOra = colFor<'oracle'>();
-const colBr = colFor<'bridge'>();
-const colSvc = colFor<'service'>();
-const colSdk = colFor<'sdk'>();
-const colFau = colFor<'faucet'>();
-const colAnl = colFor<'analytic'>();
-const colWlt = colFor<'wallet'>();
+const colApi = colFor<'apis'>();
+const colExp = colFor<'explorers'>();
+const colOra = colFor<'oracles'>();
+const colBr = colFor<'bridges'>();
+const colSvc = colFor<'services'>();
+const colSdk = colFor<'sdks'>();
+const colFau = colFor<'faucets'>();
+const colAnl = colFor<'analytics'>();
+const colWlt = colFor<'wallets'>();
 
 export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
-  api: {
-    id: 'api',
+  apis: {
+    id: 'apis',
     label: 'APIs',
     icon: {
       primary: { filename: `rpc.svg` },
@@ -120,8 +120,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
     getColumns: () => {
       const cols: Column<
-        keyof CategoryEntityMap['api'] & string,
-        CategoryEntityMap['api']
+        keyof CategoryEntityMap['apis'] & string,
+        CategoryEntityMap['apis']
       >[] = [
         colApi(
           'provider',
@@ -143,7 +143,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           'actionButtons',
           { label: 'Action', sort: 'off' },
           {
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <ActionButton
                 ctx={c}
                 actionButtons={c.row.original.actionButtons}
@@ -259,7 +259,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           {
             filter: 'multiSelect',
             tooltip: 'Filter providers by supported regions of operation.',
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <ArrayCellPopover
                 ctx={c}
                 value={c.row.original.regions}
@@ -282,7 +282,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             filter: 'range',
             tooltip:
               'Set a range for the access price (subscription or base fee).',
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <NumericRangeCell ctx={c} suffix={'$'} />
             ),
           },
@@ -296,7 +296,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           {
             filter: undefined,
             tooltip: 'Set a range for the query price (per API call).',
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <NumericRangeCell ctx={c} suffix={'$'} />
             ),
           },
@@ -323,7 +323,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.Activity } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <UptimeSla ctx={c} />
             ),
             filter: undefined,
@@ -338,7 +338,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.AlarmClockCheck } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <VerifiedUptime ctx={c} />
             ),
             filter: undefined,
@@ -353,7 +353,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.SquareActivity } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <BandwidthSla ctx={c} />
             ),
             filter: undefined,
@@ -368,7 +368,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.DatabaseZap } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <BlocksBehindSla ctx={c} />
             ),
             filter: undefined,
@@ -384,7 +384,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.ChartBarBig } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <VerifiedBlocksBehindAverage ctx={c} />
             ),
           },
@@ -397,7 +397,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.Gauge } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <VerifiedLatency ctx={c} />
             ),
           },
@@ -428,7 +428,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.Webhook } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <ArrayCellPopover
                 ctx={c}
                 value={c.row.original.availableApis}
@@ -444,7 +444,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.ShieldAlert } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <ArrayCellPopover
                 ctx={c}
                 value={c.row.original.limitations}
@@ -460,7 +460,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.Shield } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <ArrayCellPopover
                 ctx={c}
                 value={c.row.original.securityImprovements}
@@ -476,7 +476,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.BarChart } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <ArrayCellPopover
                 ctx={c}
                 value={c.row.original.monitoringAndAnalytics}
@@ -492,7 +492,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.Lightbulb } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['api'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['apis'], unknown>) => (
               <ArrayCellPopover
                 ctx={c}
                 value={c.row.original.additionalFeatures}
@@ -507,8 +507,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
   },
 
-  explorer: {
-    id: 'explorer',
+  explorers: {
+    id: 'explorers',
     label: 'Explorers',
     icon: {
       primary: { filename: `explorers.svg` },
@@ -521,8 +521,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
     getColumns: () => {
       const cols: Column<
-        keyof CategoryEntityMap['explorer'] & string,
-        CategoryEntityMap['explorer']
+        keyof CategoryEntityMap['explorers'] & string,
+        CategoryEntityMap['explorers']
       >[] = [
         colExp(
           'provider',
@@ -547,7 +547,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['explorer'], unknown>,
+              c: CellContext<CategoryEntityMap['explorers'], unknown>,
             ) => (
               <ActionButton
                 ctx={c}
@@ -584,7 +584,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['explorer'], unknown>,
+              c: CellContext<CategoryEntityMap['explorers'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -599,7 +599,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           { label: 'SDK', icon: { primary: { lucide: l.Layers } } },
           {
             component: (
-              c: CellContext<CategoryEntityMap['explorer'], unknown>,
+              c: CellContext<CategoryEntityMap['explorers'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -617,7 +617,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['explorer'], unknown>,
+              c: CellContext<CategoryEntityMap['explorers'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -669,7 +669,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['explorer'], unknown>,
+              c: CellContext<CategoryEntityMap['explorers'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -687,7 +687,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['explorer'], unknown>,
+              c: CellContext<CategoryEntityMap['explorers'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -703,8 +703,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
   },
 
-  oracle: {
-    id: 'oracle',
+  oracles: {
+    id: 'oracles',
     label: 'Oracles',
     icon: {
       primary: { filename: `oracles.svg` },
@@ -717,8 +717,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
     getColumns: () => {
       const cols: Column<
-        keyof CategoryEntityMap['oracle'] & string,
-        CategoryEntityMap['oracle']
+        keyof CategoryEntityMap['oracles'] & string,
+        CategoryEntityMap['oracles']
       >[] = [
         colOra(
           'provider',
@@ -743,7 +743,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['oracle'], unknown>,
+              c: CellContext<CategoryEntityMap['oracles'], unknown>,
             ) => (
               <ActionButton
                 ctx={c}
@@ -785,7 +785,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             filter: 'range',
             tooltip: 'Set a range for the access price of the oracle.',
             component: (
-              c: CellContext<CategoryEntityMap['oracle'], unknown>,
+              c: CellContext<CategoryEntityMap['oracles'], unknown>,
             ) => <NumericRangeCell ctx={c} />,
           },
         ),
@@ -800,7 +800,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             tooltip:
               'Set a range for the query price of the oracle (per data fetch).',
             component: (
-              c: CellContext<CategoryEntityMap['oracle'], unknown>,
+              c: CellContext<CategoryEntityMap['oracles'], unknown>,
             ) => <NumericRangeCell ctx={c} />,
           },
         ),
@@ -812,7 +812,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['oracle'], unknown>,
+              c: CellContext<CategoryEntityMap['oracles'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -832,7 +832,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['oracle'], unknown>,
+              c: CellContext<CategoryEntityMap['oracles'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -847,7 +847,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           { label: 'SDK', icon: { primary: { lucide: l.Layers } } },
           {
             component: (
-              c: CellContext<CategoryEntityMap['oracle'], unknown>,
+              c: CellContext<CategoryEntityMap['oracles'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -896,7 +896,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['oracle'], unknown>,
+              c: CellContext<CategoryEntityMap['oracles'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -914,7 +914,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['oracle'], unknown>,
+              c: CellContext<CategoryEntityMap['oracles'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -932,7 +932,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['oracle'], unknown>,
+              c: CellContext<CategoryEntityMap['oracles'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -948,8 +948,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
   },
 
-  bridge: {
-    id: 'bridge',
+  bridges: {
+    id: 'bridges',
     label: 'Bridges',
     icon: {
       primary: { filename: `bridges.svg` },
@@ -962,8 +962,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
     getColumns: () => {
       const cols: Column<
-        keyof CategoryEntityMap['bridge'] & string,
-        CategoryEntityMap['bridge']
+        keyof CategoryEntityMap['bridges'] & string,
+        CategoryEntityMap['bridges']
       >[] = [
         colBr(
           'provider',
@@ -988,7 +988,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['bridge'], unknown>,
+              c: CellContext<CategoryEntityMap['bridges'], unknown>,
             ) => (
               <ActionButton
                 ctx={c}
@@ -1031,7 +1031,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           { label: 'Support', icon: { primary: { lucide: l.Handshake } } },
           {
             component: (
-              c: CellContext<CategoryEntityMap['bridge'], unknown>,
+              c: CellContext<CategoryEntityMap['bridges'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1046,7 +1046,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           { label: 'Supported Chains', icon: { primary: { lucide: l.Ratio } } },
           {
             component: (
-              c: CellContext<CategoryEntityMap['bridge'], unknown>,
+              c: CellContext<CategoryEntityMap['bridges'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1061,7 +1061,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           { label: 'Price', icon: { primary: { lucide: l.BadgeDollarSign } } },
           {
             component: (
-              c: CellContext<CategoryEntityMap['bridge'], unknown>,
+              c: CellContext<CategoryEntityMap['bridges'], unknown>,
             ) => <NumericRangeCell ctx={c} />,
           },
         ),
@@ -1073,7 +1073,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['bridge'], unknown>,
+              c: CellContext<CategoryEntityMap['bridges'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1108,7 +1108,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['bridge'], unknown>,
+              c: CellContext<CategoryEntityMap['bridges'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1123,7 +1123,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           { label: 'SDK', icon: { primary: { lucide: l.Layers } } },
           {
             component: (
-              c: CellContext<CategoryEntityMap['bridge'], unknown>,
+              c: CellContext<CategoryEntityMap['bridges'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1141,7 +1141,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['bridge'], unknown>,
+              c: CellContext<CategoryEntityMap['bridges'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1159,7 +1159,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['bridge'], unknown>,
+              c: CellContext<CategoryEntityMap['bridges'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1208,7 +1208,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['bridge'], unknown>,
+              c: CellContext<CategoryEntityMap['bridges'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1224,8 +1224,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
   },
 
-  service: {
-    id: 'service',
+  services: {
+    id: 'services',
     label: 'Services',
     icon: {
       primary: { filename: `services.svg` },
@@ -1237,8 +1237,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
     getColumns: () => {
       const cols: Column<
-        keyof CategoryEntityMap['service'] & string,
-        CategoryEntityMap['service']
+        keyof CategoryEntityMap['services'] & string,
+        CategoryEntityMap['services']
       >[] = [
         colSvc(
           'provider',
@@ -1263,7 +1263,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['service'], unknown>,
+              c: CellContext<CategoryEntityMap['services'], unknown>,
             ) => (
               <ActionButton
                 ctx={c}
@@ -1282,7 +1282,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             filter: 'multiSelect',
             tooltip: 'Select one or more tags of developer tools.',
             component: (
-              c: CellContext<CategoryEntityMap['service'], unknown>,
+              c: CellContext<CategoryEntityMap['services'], unknown>,
             ) => <TagsCellPopover value={c.row.original.tag} title='Tags:' />,
           },
         ),
@@ -1307,24 +1307,21 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             filter: 'multiSelect',
             tooltip:
               'Select one or more available plan types for the provider.',
-            component: (c: CellContext<CategoryEntityMap['service'], unknown>) => (
-              <PlanTypeCell ctx={c} />
-            ),
+            component: (
+              c: CellContext<CategoryEntityMap['services'], unknown>,
+            ) => <PlanTypeCell ctx={c} />,
           },
           {
             size: 100,
           },
         ),
-        colSvc(
-          'planName',
-          {
-            label: 'Plan Name',
-            icon: {
-              primary: { filename: `plan.svg` },
-              fallback: { lucide: l.NotepadText },
-            },
+        colSvc('planName', {
+          label: 'Plan Name',
+          icon: {
+            primary: { filename: `plan.svg` },
+            fallback: { lucide: l.NotepadText },
           },
-         ),
+        }),
         colSvc('price', {
           label: 'Price',
           icon: { primary: { lucide: l.BadgeDollarSign } },
@@ -1339,8 +1336,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
   },
 
-  sdk: {
-    id: 'sdk',
+  sdks: {
+    id: 'sdks',
     label: 'SDKs',
     icon: {
       primary: { filename: `sdk.svg` },
@@ -1352,8 +1349,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
     getColumns: () => {
       const cols: Column<
-        keyof CategoryEntityMap['sdk'] & string,
-        CategoryEntityMap['sdk']
+        keyof CategoryEntityMap['sdks'] & string,
+        CategoryEntityMap['sdks']
       >[] = [
         colSdk(
           'provider',
@@ -1377,9 +1374,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             icon: { primary: { lucide: l.Navigation } },
           },
           {
-            component: (
-              c: CellContext<CategoryEntityMap['sdk'], unknown>,
-            ) => (
+            component: (c: CellContext<CategoryEntityMap['sdks'], unknown>) => (
               <ActionButton
                 ctx={c}
                 actionButtons={c.row.original.actionButtons}
@@ -1396,9 +1391,9 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           {
             filter: 'multiSelect',
             tooltip: 'Select one or more tags of developer tools.',
-            component: (
-              c: CellContext<CategoryEntityMap['sdk'], unknown>,
-            ) => <TagsCellPopover value={c.row.original.tag} title='Tags:' />,
+            component: (c: CellContext<CategoryEntityMap['sdks'], unknown>) => (
+              <TagsCellPopover value={c.row.original.tag} title='Tags:' />
+            ),
           },
         ),
         colSdk(
@@ -1422,7 +1417,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             filter: 'multiSelect',
             tooltip:
               'Select one or more available plan types for the provider.',
-            component: (c: CellContext<CategoryEntityMap['sdk'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['sdks'], unknown>) => (
               <PlanTypeCell ctx={c} />
             ),
           },
@@ -1430,38 +1425,34 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             size: 100,
           },
         ),
-        colSdk(
-          'planName',
-          {
-            label: 'Plan Name',
-            icon: {
-              primary: { filename: `plan.svg` },
-              fallback: { lucide: l.NotepadText },
-            },
+        colSdk('planName', {
+          label: 'Plan Name',
+          icon: {
+            primary: { filename: `plan.svg` },
+            fallback: { lucide: l.NotepadText },
           },
-        ),
+        }),
         colSdk('price', {
           label: 'Price',
           icon: { primary: { lucide: l.BadgeDollarSign } },
         }),
-        colSdk(
-          'trial',
-          {
-            label: 'Trial',
-            icon: {
-              primary: { filename: `trial.svg` },
-              fallback: { lucide: l.Tag },
-            },
+        colSdk('trial', {
+          label: 'Trial',
+          icon: {
+            primary: { filename: `trial.svg` },
+            fallback: { lucide: l.Tag },
           },
-        ),
-        colSdk('programmingLanguage', {
-          label: 'Programming Language',
-          icon: { primary: { lucide: l.Code } },
-          
-        },
+        }),
+        colSdk(
+          'programmingLanguage',
+          {
+            label: 'Programming Language',
+            icon: { primary: { lucide: l.Code } },
+          },
           {
             filter: 'multiSelect',
-            tooltip: 'Select one or more programming languages supported by the SDK.',
+            tooltip:
+              'Select one or more programming languages supported by the SDK.',
           },
         ),
         colSdk('description', {
@@ -1471,11 +1462,11 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
         colSdk(
           'dependencies',
           {
-          label: 'Dependencies',
-          icon: { primary: { lucide: l.Package } },
+            label: 'Dependencies',
+            icon: { primary: { lucide: l.Package } },
           },
           {
-            component: (c: CellContext<CategoryEntityMap['sdk'], unknown>) => (
+            component: (c: CellContext<CategoryEntityMap['sdks'], unknown>) => (
               <ArrayCellPopover
                 value={c.row.original.dependencies}
                 title='Dependencies:'
@@ -1506,8 +1497,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
   },
 
-  faucet: {
-    id: 'faucet',
+  faucets: {
+    id: 'faucets',
     label: 'Faucets',
     icon: {
       primary: {
@@ -1523,8 +1514,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
     getColumns: () => {
       const cols: Column<
-        keyof CategoryEntityMap['faucet'] & string,
-        CategoryEntityMap['faucet']
+        keyof CategoryEntityMap['faucets'] & string,
+        CategoryEntityMap['faucets']
       >[] = [
         colFau(
           'provider',
@@ -1549,7 +1540,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['faucet'], unknown>,
+              c: CellContext<CategoryEntityMap['faucets'], unknown>,
             ) => (
               <ActionButton
                 ctx={c}
@@ -1619,7 +1610,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['faucet'], unknown>,
+              c: CellContext<CategoryEntityMap['faucets'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1634,7 +1625,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           { label: 'Price', icon: { primary: { lucide: l.BadgeDollarSign } } },
           {
             component: (
-              c: CellContext<CategoryEntityMap['faucet'], unknown>,
+              c: CellContext<CategoryEntityMap['faucets'], unknown>,
             ) => <NumericRangeCell ctx={c} />,
           },
         ),
@@ -1644,8 +1635,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
   },
 
-  analytic: {
-    id: 'analytic',
+  analytics: {
+    id: 'analytics',
     label: 'Analytics',
     icon: {
       primary: { filename: `analytics.svg` },
@@ -1657,8 +1648,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
     getColumns: () => {
       const cols: Column<
-        keyof CategoryEntityMap['analytic'] & string,
-        CategoryEntityMap['analytic']
+        keyof CategoryEntityMap['analytics'] & string,
+        CategoryEntityMap['analytics']
       >[] = [
         colAnl(
           'provider',
@@ -1683,7 +1674,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['analytic'], unknown>,
+              c: CellContext<CategoryEntityMap['analytics'], unknown>,
             ) => (
               <ActionButton
                 ctx={c}
@@ -1706,7 +1697,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           { label: 'Price', icon: { primary: { lucide: l.BadgeDollarSign } } },
           {
             component: (
-              c: CellContext<CategoryEntityMap['analytic'], unknown>,
+              c: CellContext<CategoryEntityMap['analytics'], unknown>,
             ) => <NumericRangeCell ctx={c} />,
           },
         ),
@@ -1721,7 +1712,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             tooltip:
               'Filter by supported data sources (e.g., subgraphs, APIs).',
             component: (
-              c: CellContext<CategoryEntityMap['analytic'], unknown>,
+              c: CellContext<CategoryEntityMap['analytics'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1750,7 +1741,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['analytic'], unknown>,
+              c: CellContext<CategoryEntityMap['analytics'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1766,8 +1757,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
   },
 
-  wallet: {
-    id: 'wallet',
+  wallets: {
+    id: 'wallets',
     label: 'Wallets',
     icon: {
       primary: { filename: `wallets.svg` },
@@ -1779,8 +1770,8 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
     },
     getColumns: () => {
       const cols: Column<
-        keyof CategoryEntityMap['wallet'] & string,
-        CategoryEntityMap['wallet']
+        keyof CategoryEntityMap['wallets'] & string,
+        CategoryEntityMap['wallets']
       >[] = [
         colWlt(
           'provider',
@@ -1805,7 +1796,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           },
           {
             component: (
-              c: CellContext<CategoryEntityMap['wallet'], unknown>,
+              c: CellContext<CategoryEntityMap['wallets'], unknown>,
             ) => (
               <ActionButton
                 ctx={c}
@@ -1838,7 +1829,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             filter: undefined,
             tooltip: 'Platforms where the wallet is available.',
             component: (
-              c: CellContext<CategoryEntityMap['wallet'], unknown>,
+              c: CellContext<CategoryEntityMap['wallets'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1928,7 +1919,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             filter: 'multiSelect',
             tooltip: 'Supported token standards.',
             component: (
-              c: CellContext<CategoryEntityMap['wallet'], unknown>,
+              c: CellContext<CategoryEntityMap['wallets'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1954,7 +1945,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
           { label: 'Price', icon: { primary: { lucide: l.BadgeDollarSign } } },
           {
             component: (
-              c: CellContext<CategoryEntityMap['wallet'], unknown>,
+              c: CellContext<CategoryEntityMap['wallets'], unknown>,
             ) => <NumericRangeCell ctx={c} />,
           },
         ),
@@ -1965,7 +1956,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             filter: undefined,
             tooltip: 'Support channels provided by the wallet.',
             component: (
-              c: CellContext<CategoryEntityMap['wallet'], unknown>,
+              c: CellContext<CategoryEntityMap['wallets'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -1985,7 +1976,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             filter: undefined,
             tooltip: 'Audit reports or sources.',
             component: (
-              c: CellContext<CategoryEntityMap['wallet'], unknown>,
+              c: CellContext<CategoryEntityMap['wallets'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}
@@ -2005,7 +1996,7 @@ export const CATEGORIES: { [K in CategoryKey]: CategoryCfg<K> } = {
             filter: 'multiSelect',
             tooltip: 'Supported interface languages.',
             component: (
-              c: CellContext<CategoryEntityMap['wallet'], unknown>,
+              c: CellContext<CategoryEntityMap['wallets'], unknown>,
             ) => (
               <ArrayCellPopover
                 ctx={c}

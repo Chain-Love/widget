@@ -1,41 +1,41 @@
 import { z } from 'zod';
 
 import type {
-  Api,
-  Explorer,
-  Oracle,
-  Bridge,
-  Service,
-  SDK,
-  Faucet,
-  Analytic,
-  Wallet,
+  Apis,
+  Explorers,
+  Oracles,
+  Bridges,
+  Services,
+  SDKs,
+  Faucets,
+  Analytics,
+  Wallets,
 } from './infrastructure.types';
 
 export type CategoryDataMap = {
-  api: Api;
-  explorer: Explorer;
-  oracle: Oracle;
-  bridge: Bridge;
-  service: Service;
-  sdk: SDK;
-  faucet: Faucet;
-  analytic: Analytic;
-  wallet: Wallet;
+  apis: Apis;
+  explorers: Explorers;
+  oracles: Oracles;
+  bridges: Bridges;
+  services: Services;
+  sdks: SDKs;
+  faucets: Faucets;
+  analytics: Analytics;
+  wallets: Wallets;
 };
 
 export type CategoryKey = keyof CategoryDataMap;
 
 export const categorySchema = z.enum([
-  'api',
-  'explorer',
-  'oracle',
-  'bridge',
-  'service',
-  'sdk',
-  'faucet',
-  'analytic',
-  'wallet',
+  'apis',
+  'explorers',
+  'oracles',
+  'bridges',
+  'services',
+  'sdks',
+  'faucets',
+  'analytics',
+  'wallets',
 ] as [CategoryKey, ...CategoryKey[]]);
 
 export type CategoryEntityMap = {
