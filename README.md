@@ -5,8 +5,8 @@ network.
 This guide is **GitBook-first** and offers two ways to use the widget:
 
 1. **Use our hosted widget** via the official GitBook integration (fastest).
-2. **Zero-Trust**: fork the widget + data repos, deploy the widget under _your_
-   domain, and point the integration to your URL.
+2. **Zero-Trust**: deploy the widget under _your_ domain, host the JSON feeds,
+   and point the integration to your URL.
 
 ---
 
@@ -45,7 +45,7 @@ If your organization requires full control:
 ### 1) Fork & Deploy the Widget
 
 - Fork **https://github.com/Chain-Love/widget** to your GitHub org.
-- Deploy **once** to your preferred host (e.g., Vercel/Netlify) (see
+- Deploy to your preferred host (e.g., Vercel/Netlify) (see
   [Deploy (quick guide)](#deploy-quick-guide)).
 - You’ll get your own domain, e.g. `https://your-widget.vercel.app`.
 - In GitBook, use our official **Chain.Love Widget Integration**  
@@ -54,39 +54,29 @@ If your organization requires full control:
   set the URL to **your** domain, for example:  
   `https://your-widget.vercel.app/?network=filecoin`.
 
-### 2) Fork the Data Repo
+### 2) Choose the data feed
 
-- Fork **https://github.com/Chain-Love/chain-love**.
-- The JSON feeds live under in **`json` branch** in the **`json` folder**, where
-  each JSON file is dedicated to the specific network, e.g.  
-  `json/filecoin.json`, `json/ethereum.json`, `json/arbitrum.json`.
-- Each file is accessible via GitHub Raw in **your** fork, e.g.  
-  `https://raw.githubusercontent.com/<your-org>/chain-love/json/json/filecoin.json`.
+The widget's default feeds are JSON files attached to the latest
+[Chain.Love release](https://github.com/Chain-Love/chain-love/releases/latest).
+For example, the official Filecoin feed follows the latest published release at
+`https://github.com/Chain-Love/chain-love/releases/latest/download/filecoin.json`.
 
-### 3) Point the Widget to Your Data
+For self-hosted data, mirror the release assets on your own host or publish the
+generated JSON files as release assets in your fork of the data repository.
 
-- In the widget project config file (`src/app_config.json`), change each
-  network’s `url` to your fork’s Raw URL (see
-  [Config Schema Explained](#config-schema-explained)).
-- **Deploy the widget once.** After that you typically **do not need to
-  redeploy** the widget when data changes — because the widget fetches JSON from
-  your fork’s Raw URLs on each load.
+### 3) Point the widget to your feed
 
-### 4) Stay Up-to-Date
+Set each network's `url` in `src/app_config.json` to the JSON asset your server
+can fetch. For a fork that publishes GitHub release assets, use
+`https://github.com/<your-org>/chain-love/releases/latest/download/filecoin.json`.
+Deploy the widget after changing these URLs. Subsequent updates to the JSON
+files are picked up by new widget requests.
 
-We continuously update datasets upstream. Periodically sync your fork to stay
-current:
+### 4) Keep the feed current
 
-```bash
-git remote add upstream https://github.com/Chain-Love/chain-love.git
-git fetch upstream
-git checkout main
-git merge upstream/main
-git push origin main
-```
-
-Your widget instances will pick up new data automatically (no redeploy) because
-the URLs point to your fork’s latest JSON.
+Publish updated assets under the configured URLs. Before updating an embed,
+request `/api/infrastructure-providers?network=filecoin&category=apis` on your
+widget host and confirm that `result.apis` contains the expected data.
 
 ---
 
@@ -99,13 +89,13 @@ GitBook integration block.
 | ---------: | :----- | :------- | :------------------ | :----------------------------------------------------------------------------------------------------------------------------- |
 |  `network` | string | **Yes**  | `?network=filecoin` | Selects which network to show (key from your config, e.g. `filecoin`, `eth`, `arbitrum`).                                      |
 |    `chain` | string | No       | `&chain=mainnet`    | Preselect a specific chain **key** within the chosen network (e.g. `mainnet`, `sepolia`, `nova`).                              |
-| `category` | string | No       | `&category=api`     | Focus on a toolbox category like `api`, `explorer`, `oracle`, `bridge`, `devTool`, `faucet`, `analytic`, `wallet`. |
+| `category` | string | No       | `&category=apis`    | Show one toolbox category. Accepted values are `apis`, `explorers`, `oracles`, `bridges`, `services`, `sdks`, `faucets`, `analytics` or `wallets`. |
 |    `theme` | string | No       | `&theme=dark`       | UI theme (`light` or `dark` or `system`). Defaults to `system` unless you customize it.                                        |
 
 **Examples**
 
 ```text
-https://widget.docs.chain.love/?network=filecoin&category=api&theme=dark
+https://widget.docs.chain.love/?network=filecoin&category=apis&theme=dark
 https://your-widget.vercel.app/?network=arbitrum&chain=nova
 ```
 
@@ -123,7 +113,7 @@ Here’s an example structure:
   "proteusShieldDocs": "https://protofire-org.gitbook.io/chain-love-docs/",
   "dataSources": {
     "filecoin": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/filecoin.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/filecoin.json",
       "originNetwork": {
         "name": "Filecoin",
         "icon": "fil.svg",
@@ -138,7 +128,7 @@ Here’s an example structure:
       }
     },
     "arbitrum": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/arbitrum.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/arbitrum.json",
       "originNetwork": {
         "name": "Arbitrum",
         "icon": "arbitrum.svg",
@@ -157,7 +147,6 @@ Here’s an example structure:
         ]
       }
     }
-    // add/remove networks as needed
   }
 }
 ```
@@ -173,8 +162,8 @@ Here’s an example structure:
 - **`proteusShieldDocs`** — link to the **Chain.Love GitBook documentation**
   (used for “Learn more” and help sections inside the widget).
 - **`dataSources`** — map of network keys → definition:
-  - **`url`** — Raw URL to the JSON dataset for this network (use your fork’s
-    URL in zero-trust mode).
+  - **`url`** — URL the widget server uses to fetch this network's JSON feed.
+    It can point to a release asset or a self-hosted copy.
   - **`originNetwork.name`** — display name (e.g., “Ethereum”).
   - **`originNetwork.icon`** — icon filename available under `assetsUrl`.
   - **`originNetwork.chains[]`** — list of supported chains:
@@ -182,7 +171,7 @@ Here’s an example structure:
     - **`icon`** — icon filename.
     - **`key`** — the value you pass in `?chain=<key>`.
 - **`hiddenColumns`** — defines which table columns are **hidden by default**
-  for each category (`api`, `explorer`, `oracle`, etc.).  
+  for each category (`apis`, `explorers`, `oracles`, etc.).
   This controls what data users see initially inside the widget.  
   We **recommend keeping the default configuration** as it’s optimized for
   clarity and layout balance,  
@@ -210,15 +199,15 @@ Here’s an example structure:
   If you still experience issues, feel free to contact us and include your
   GitBook page link.
 - **Data not loading:** ensure your `?network=` value exists in your widget
-  config and that the JSON Raw URL is reachable (open it in the browser).
+  config and that the widget server can download and parse the configured JSON feed.
 - **Icons missing:** verify `assetsUrl` and icon filenames.
 
 ---
 
 ## Deploy (quick guide)
 
-This widget is a standard Node/React static app. Below are quick steps to get it
-live on **Vercel** or **Netlify**, plus a local build/test checklist.
+This widget is a Next.js app with a server-side API route that fetches the data.
+Below are build and deployment steps for **Vercel** or **Netlify**.
 
 ---
 
@@ -286,8 +275,7 @@ live on **Vercel** or **Netlify**, plus a local build/test checklist.
 
 ## TL;DR
 
-- Use **our hosted URL** in the GitBook integration for fastest setup:
-
-- For **zero-trust**, fork **both** repos, deploy the widget once under your
-  domain, point its `dataSources.*.url` to **your fork**, and periodically sync
-  from upstream to stay current — **no redeploy** needed for data updates.
+- Use **our hosted URL** in the GitBook integration for fastest setup.
+- For **zero-trust**, deploy the widget under your domain and point each
+  `dataSources.*.url` to a JSON feed you publish. To update the data,
+  refresh the files at the configured URLs.

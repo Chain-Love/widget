@@ -4,7 +4,7 @@
 
   "dataSources": {
     "algorand": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/algorand.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/algorand.json",
       "originNetwork": {
         "name": "Algorand",
         "icon": "algorand-mainnet.svg",
@@ -24,7 +24,7 @@
     },
 
     "arbitrum": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/arbitrum.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/arbitrum.json",
       "originNetwork": {
         "name": "Arbitrum",
         "icon": "arbitrum.svg",
@@ -49,7 +49,7 @@
     },
 
     "astar": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/astar.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/astar.json",
       "originNetwork": {
         "name": "Astar",
         "icon": "astar.svg",
@@ -74,7 +74,7 @@
     },
 
     "base": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/base.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/base.json",
       "originNetwork": {
         "name": "Base",
         "icon": "base.svg",
@@ -94,7 +94,7 @@
     },
 
     "eth": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/ethereum.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/ethereum.json",
       "originNetwork": {
         "name": "Ethereum",
         "icon": "eth.svg",
@@ -106,7 +106,7 @@
     },
 
     "filecoin": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/filecoin.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/filecoin.json",
       "originNetwork": {
         "name": "Filecoin",
         "icon": "fil.svg",
@@ -126,7 +126,7 @@
     },
 
     "flare": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/flare.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/flare.json",
       "originNetwork": {
         "name": "Flare",
         "icon": "flare.svg",
@@ -156,7 +156,7 @@
     },
 
     "lens": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/lens.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/lens.json",
       "originNetwork": {
         "name": "Lens",
         "icon": "lens.svg",
@@ -176,7 +176,7 @@
     },
 
     "linea": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/linea.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/linea.json",
       "originNetwork": {
         "name": "Linea",
         "icon": "linea.svg",
@@ -196,7 +196,7 @@
     },
 
     "optimism": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/optimism.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/optimism.json",
       "originNetwork": {
         "name": "Optimism",
         "icon": "optimism-mainnet.svg",
@@ -216,7 +216,7 @@
     },
 
     "polygon": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/polygon.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/polygon.json",
       "originNetwork": {
         "name": "Polygon",
         "icon": "polygon.svg",
@@ -231,7 +231,7 @@
     },
 
     "somnia": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/somnia.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/somnia.json",
       "originNetwork": {
         "name": "Somnia",
         "icon": "somnia.svg",
@@ -247,7 +247,7 @@
     },
 
     "stellar": {
-      "url": "https://raw.githubusercontent.com/Chain-Love/chain-love/json/json/stellar.json",
+      "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/stellar.json",
       "originNetwork": {
         "name": "Stellar",
         "icon": "stellar.svg",
