@@ -66,8 +66,9 @@ generated JSON files as release assets in your fork of the data repository.
 
 ### 3) Point the widget to your feed
 
-Set each network's `url` in `src/app_config.json` to the JSON asset your server
-can fetch. For a fork that publishes GitHub release assets, use
+Set each network's `url` in `src/app_config.json` to a direct JSON URL without a
+query string or fragment. The widget appends a timestamp query when it fetches
+the file, so the host must accept that query. For a fork that publishes GitHub release assets, use
 `https://github.com/<your-org>/chain-love/releases/latest/download/filecoin.json`.
 Deploy the widget after changing these URLs. Subsequent updates to the JSON
 files are picked up by new widget requests.
@@ -111,6 +112,7 @@ Here’s an example structure:
 {
   "assetsUrl": "https://assets.chain.love",
   "proteusShieldDocs": "https://protofire-org.gitbook.io/chain-love-docs/",
+  "hiddenColumns": {},
   "dataSources": {
     "filecoin": {
       "url": "https://github.com/Chain-Love/chain-love/releases/latest/download/filecoin.json",
@@ -213,14 +215,15 @@ Below are build and deployment steps for **Vercel** or **Netlify**.
 
 ### Local build & run (test before deploy)
 
-1. Install Node.js (LTS recommended) and Git.
-2. Clone your fork:
+1. Install Node.js (LTS recommended), Git and Yarn Classic (1.x).
+2. Clone the widget and enter its directory. To work on your fork, use its clone URL in the first command.
    ```bash
-   git clone https://github.com/<your-org>/widget.git
+   git clone https://github.com/Chain-Love/widget.git widget
+   cd widget
    ```
 3. Install dependencies and build:
    ```bash
-   yarn install
+   yarn install --frozen-lockfile
    yarn run build
    ```
 4. Test locally:
